@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: New Asteroid Factory
   m_EditorClassIdentifier: 
   _small:
-    Prefab: {fileID: 0}
+    Prefab: {fileID: 6826336844846499865, guid: 32c03a63af95f694aa8edc314262b026, type: 3}
     Scale:
       _min: 1
       _max: 1
@@ -27,7 +27,7 @@ MonoBehaviour:
       _min: 1
       _max: 1
   _medium:
-    Prefab: {fileID: 0}
+    Prefab: {fileID: 1908777626567942300, guid: 9c97547dca1795947802d99d91022564, type: 3}
     Scale:
       _min: 1
       _max: 1
@@ -41,7 +41,7 @@ MonoBehaviour:
       _min: 1
       _max: 1
   _large:
-    Prefab: {fileID: 0}
+    Prefab: {fileID: 2005613367464198737, guid: 39a3df4a0cb31ba4ba979008e25a378a, type: 3}
     Scale:
       _min: 1
       _max: 1
