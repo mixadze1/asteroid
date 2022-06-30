@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
+    [SerializeField] private Transform _vectorAsteroidMove;
+    [SerializeField] private SpaceShipFactory _shipFactory;
+    [SerializeField] private SpaceShipType _type;
     [SerializeField] private GameScenario _scenario;
     [SerializeField] private List<Transform> _spawnCoord = new List<Transform>();
     [SerializeField, Range(1f, 15f)] private float _prepareTime = 10f;
@@ -15,6 +18,7 @@ public class Game : MonoBehaviour
     private Coroutine _prepareRoutine;
 
     private GameBehaviorCollection _asteroid = new GameBehaviorCollection();
+    private GameBehaviorCollection _spaceShip = new GameBehaviorCollection();
     private bool _isGetReady = true;
     private bool _scenarioInProcess;
 
@@ -58,18 +62,20 @@ public class Game : MonoBehaviour
         {
             StopCoroutine(_prepareRoutine);
         }
+        CreatePlayer();
     }
 
     private void CreatePlayer()
     {
-        //_playerMove = Instantiate(_prefab, _spawnCoord.position, Quaternion.identity).GetComponent<SpaceShip>();
+        SpaceShip spaceShip = _shipFactory.Get(_type);
+        spaceShip.SpawnOn();
     }
 
     public static void SpawnAsteroid(AsteroidFactory factory, AsteroidType type)
     {
         Transform transforms = _instance._spawnCoord[Random.Range(0,_instance._spawnCoord.Count - 1)];
         Asteroid asteroid = factory.Get(type);
-        asteroid.SpawnOn(transforms);
+        asteroid.SpawnOn(transforms, _instance._vectorAsteroidMove);
        _instance._asteroid.Add(asteroid); 
       
     }

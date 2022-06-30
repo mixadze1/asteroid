@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpaceShip : MonoBehaviour
+public class SpaceShip : GameBehavior
 {
     [SerializeField] private Transform _model;
     private float _speedMax;
@@ -25,8 +25,9 @@ public class SpaceShip : MonoBehaviour
   
 
     public SpaceShipFactory OriginFactory { get; set; }
-    public void Initialize(float scale, float speed,float inertia, float health, float damage, float speedDamping)
+    public void Initialize(float rotate,float scale, float speed,float inertia, float health, float damage, float speedDamping)
     {
+        _speedRotate = rotate;
         _model.localScale = new Vector3(scale, scale, scale);
         _speed = speed;
         _inertia = inertia;
@@ -36,7 +37,11 @@ public class SpaceShip : MonoBehaviour
         _speedDamping = speedDamping;
     }
 
-    public void PhysicsUpdate()
+    public void SpawnOn()
+    {
+        _model.localPosition = new Vector3(0,0,0);
+    }
+    public void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.W))
         {
@@ -60,6 +65,10 @@ public class SpaceShip : MonoBehaviour
         {
             RotateShip(-_speedRotate);
         }
+    }
+    public void PhysicsUpdate()
+    {
+        
 
     }
     private void MoveInertia()
@@ -77,6 +86,11 @@ public class SpaceShip : MonoBehaviour
     private void RotateShip(float sideRotate)
     {
         this.transform.localRotation *= Quaternion.Euler(0f, 0f, sideRotate);
+    }
+
+    public override void Recycle()
+    {
+        throw new System.NotImplementedException();
     }
 }
 

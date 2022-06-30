@@ -5,9 +5,13 @@ using UnityEngine;
 public class Asteroid : GameBehavior
 {
     [SerializeField] private Transform _model;
+
+    private Vector3 _startPosition;
     private float _directionAngleFrom, _directionAngleTo;
     private float _pathOffset;
     private float _speed;
+  
+    private Transform _moveTo;
     public float Scale { get; private set; }
     public float Health { get; private set; }
     public float Damage { get; private set; }
@@ -24,9 +28,11 @@ public class Asteroid : GameBehavior
         Health = health;
     }
 
-    public void SpawnOn(Transform position)
+    public void SpawnOn(Transform position, Transform asteroidMove)
     {
         _model.localPosition = position.position;
+        _moveTo = asteroidMove;
+        _startPosition = _model.localPosition;
     }   
 
     public override bool GameUpdate()
@@ -55,7 +61,26 @@ public class Asteroid : GameBehavior
 
     private void MoveAsteroid()
     {
-        _model.transform.position += new Vector3(Random.Range(0.001f, 0.01f), Random.Range(0.001f, 0.01f), Random.Range(0.001f, 0.01f));
+        if(_startPosition.x < 0 && _startPosition.y > 0)
+        {
+            transform.position +=  new Vector3(0.05f, -0.05f, 0) * 0.1f * _speed;
+        }
+
+        if(_startPosition.x < 0 && _startPosition.y < 0)
+        {
+            transform.position += new Vector3(0.05f, 0.05f, 0) * 0.1f * _speed;
+        }
+
+        if (_startPosition.x > 0 && _startPosition.y < 0)
+        {
+            transform.position += new Vector3(-0.05f, 0.05f, 0) * 0.1f * _speed;
+        }
+
+        if (_startPosition.x > 0 && _startPosition.y > 0)
+        {
+            transform.position -=  new Vector3(-0.05f, -0.05f, 0) * 0.1f * _speed;
+        }
+       
     }
 
     public void TakeDamage(float damage)

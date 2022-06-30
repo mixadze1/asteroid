@@ -34,7 +34,7 @@ public class SpaceShipFactory : GameObjectFactory
         var config = GetConfig(type);
         SpaceShip instance = CreateGameObjectInstance(config.Prefab);
         instance.OriginFactory = this;
-        instance.Initialize(config.Scale,config.Speed,
+        instance.Initialize(config.SpeedRotatePlayer, config.Scale,config.Speed,
             config.Inertia, config.Health, config.Damage,config.SpeedDamping);
         return instance;
     }
