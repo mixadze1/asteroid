@@ -20,6 +20,11 @@ public class Game : MonoBehaviour
 
     public static Game _instance;
 
+    private void OnEnable()
+    {
+        _instance = this;
+    }
+
     private void Start()
     {
         BeginNewGame();
@@ -62,9 +67,9 @@ public class Game : MonoBehaviour
 
     public static void SpawnAsteroid(AsteroidFactory factory, AsteroidType type)
     {
-        //Transform transforms = _instance._spawnCoord[0];
+        Transform transforms = _instance._spawnCoord[Random.Range(0,_instance._spawnCoord.Count - 1)];
         Asteroid asteroid = factory.Get(type);
-        asteroid.SpawnOn();
+        asteroid.SpawnOn(transforms);
        _instance._asteroid.Add(asteroid); 
       
     }

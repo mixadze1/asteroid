@@ -24,19 +24,13 @@ public class Asteroid : GameBehavior
         Health = health;
     }
 
-    public void SpawnOn()
+    public void SpawnOn(Transform position)
     {
-       List<Vector2> position = new List<Vector2>();
-        position.Add(new Vector2(-12, 4));
-        position.Add ( new Vector3(-12, -5));
-        position.Add ( new Vector3(12,4));
-        position.Add ( new Vector3(12,-5));
-        _model.position = position[Random.Range(0,position.Count - 1)];
+        _model.localPosition = position.position;
     }   
 
     public override bool GameUpdate()
     {
-        Debug.Log("tut");
         if (Health <= 0)
         {
             if (Type == AsteroidType.Large)
@@ -58,14 +52,12 @@ public class Asteroid : GameBehavior
         return true;
     }
 
-    private void Update()
+
+    private void MoveAsteroid()
     {
         _model.transform.position += new Vector3(Random.Range(0.001f, 0.01f), Random.Range(0.001f, 0.01f), Random.Range(0.001f, 0.01f));
     }
-    private void MoveAsteroid()
-    {
-       
-    }
+
     public void TakeDamage(float damage)
     {
         Health -= damage;
