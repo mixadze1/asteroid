@@ -17,7 +17,7 @@ MonoBehaviour:
     SpeedMax: 0.35
     Speed: 0.117
     SpeedRotatePlayer: 2.61
-    Health: 3
+    Health: 1
     Inertia: 0.03
     Damage: 1
     Scale: 0.1023

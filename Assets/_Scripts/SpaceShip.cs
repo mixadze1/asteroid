@@ -15,19 +15,21 @@ public class SpaceShip : GameBehavior
     private float _speedDamping;
     private float _scale;
     private float _health;
+    private float _timeImmortal = 3f;
     private float _currentSpeed;
+    private float _timeBlinking = 0.4f;
 
     private Vector3 _rememberVector;
 
     private bool _isImmortal;
     private bool _isStartGame = true;
 
-  
+
     public float Damage { get; private set; }
-  
+
 
     public SpaceShipFactory OriginFactory { get; set; }
-    public void Initialize(float rotate,float scale, float speed,float inertia, float health, float damage, float speedDamping)
+    public void Initialize(float rotate, float scale, float speed, float inertia, float health, float damage, float speedDamping)
     {
         _speedRotate = rotate;
         _model.localScale = new Vector3(scale, scale, scale);
@@ -42,14 +44,15 @@ public class SpaceShip : GameBehavior
     public void SpawnOn()
     {
         _model.localPosition = Vector3.zero;
+        StartCoroutine(StartImmortal());
     }
 
     public void Update()
     {
-       if (_health <= 0)
+
+        if (_health <= 0)
         {
             Destroy(this.gameObject);
-            Debug.Log("lose");
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
@@ -60,6 +63,7 @@ public class SpaceShip : GameBehavior
 
     public void FixedUpdate()
     {
+
         if (Input.GetKey(KeyCode.W))
         {
             AccelerationShip();
@@ -84,15 +88,35 @@ public class SpaceShip : GameBehavior
         }
     }
 
+    private IEnumerator StartImmortal()
+    {
+        float count = 0;
+        for (count = 0; count <= _timeImmortal; )
+        {
+            yield return new WaitForSeconds(_timeBlinking);
+            count += _timeBlinking;
+            _model.gameObject.GetComponent<Renderer>().enabled = false;    
+            yield return new WaitForSeconds(_timeBlinking);
+            count += _timeBlinking;
+            _model.gameObject.GetComponent<Renderer>().enabled = true;
+        }
+
+        _isImmortal = false;
+
+    }
+
+
     public void TakeDamage(float damage)
     {
-        Debug.Log(_health);
+        if (_isImmortal)
+            return;
+
         _health -= damage;
     }
 
     private void Shoot()
     {
-        Game.SpawnShell().Initialize(_spawnShellCoord , _speedShell, Damage);
+        Game.SpawnShell().Initialize(_spawnShellCoord , _speedShell, Damage, Color.red, null);
     }
 
     private void MoveInertia()

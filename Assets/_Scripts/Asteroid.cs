@@ -42,7 +42,6 @@ public class Asteroid : GameBehavior
 
     public override bool GameUpdate()
     {
-        Debug.Log("tut");
         if (Health <= 0)
         {
             if (Type == AsteroidType.Large)

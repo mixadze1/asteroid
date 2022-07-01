@@ -310,7 +310,7 @@ MonoBehaviour:
   - {fileID: 658969588}
   - {fileID: 1527686574}
   - {fileID: 1014822861}
-  _timeToSpawnNlo: 1
+  _timeToSpawnNlo: 25
   _prepareTime: 1
 --- !u!4 &570077017
 Transform:

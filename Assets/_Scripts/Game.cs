@@ -17,7 +17,6 @@ public class Game : MonoBehaviour
     [SerializeField, Range(1f, 15f)] private float _prepareTime = 10f;
    
     private GameScenario.State _activateScenarioAsteroid;
-    private PlayerShoot _playerShoot;
 
     private Coroutine _prepareRoutine;
     private Coroutine _prepareRoutineNlo;
@@ -26,7 +25,7 @@ public class Game : MonoBehaviour
     private GameBehaviorCollection _nonEnemies = new GameBehaviorCollection();
     private bool _isGetReady = true;
     private bool _scenarioInProcess;
-
+    private bool _isNotLose;
     public static Game _instance;
 
     private void OnEnable()
@@ -75,10 +74,13 @@ public class Game : MonoBehaviour
     }
 
     private IEnumerator CreateNlo()
-    {
-        yield return new WaitForSeconds(_timeToSpawnNlo);
-        Enemy enemy = _enemyFactory.Get(EnemyType.NLO);
-        enemy.SpawnOn(_spawnCoord[Random.Range(0, _instance._spawnCoord.Count - 1)]);
+    {while(!_isNotLose)
+        {
+            yield return new WaitForSeconds(_instance._timeToSpawnNlo);
+            Enemy enemy = _instance._enemyFactory.Get(EnemyType.NLO);
+            enemy.SpawnOn(_instance._spawnCoord[Random.Range(0, _instance._spawnCoord.Count - 1)]);
+        }
+       
     }
 
     public static Shell SpawnShell()

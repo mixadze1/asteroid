@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 161522401194839290}
   - component: {fileID: 4715736740744284955}
   - component: {fileID: 3622903934982466742}
-  - component: {fileID: 3096181471946282516}
+  - component: {fileID: 5095515502953876622}
   m_Layer: 0
   m_Name: shell
   m_TagString: Untagged
@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30f0470b2cebd774e93f0298de350808, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _targetPoint: {fileID: 3096181471946282516}
+  _targetPoint: {fileID: 5095515502953876622}
 --- !u!61 &4715736740744284955
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -142,13 +142,13 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3096181471946282516
+--- !u!114 &5095515502953876622
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

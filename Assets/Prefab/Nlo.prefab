@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2345207402420243786}
   - component: {fileID: -5509464353361976107}
   - component: {fileID: 1188499799917370570}
+  - component: {fileID: 9136688784568073533}
   m_Layer: 0
   m_Name: Nlo
   m_TagString: Untagged
@@ -99,6 +100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12cdc6de51630ff4a8f520d156988162, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _spawnShellCoord: {fileID: 2345207402420243784}
 --- !u!61 &-5509464353361976107
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -146,3 +148,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &9136688784568073533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2345207402420243789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdf1b39313965ca42a2ec47e9baa5982, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
