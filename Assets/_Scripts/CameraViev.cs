@@ -4,48 +4,63 @@ using UnityEngine;
 
 public class CameraViev : MonoBehaviour
 {
-    //private Camera _camera;
-   [SerializeField] private Transform _model;
 
-    public void Init(Transform model)
-    {
-        _model = model;
-        //_camera = camera;
-    }
 
     public void LateUpdate()
     {
-        Vector3 point = Camera.main.WorldToViewportPoint(transform.position);
+        Vector3 point = Camera.main.WorldToScreenPoint(transform.position);
+        Debug.Log(point);
         if (point.x < 0)
         {
-            Debug.Log("tut");
             point.x = 1;
-            Teleport(point);
+            Debug.Log("tut");
+            TeleportXZero(point);
         }
-            
-        if (point.x > 1)
+
+        if (point.x > Screen.width)
         {
+            Debug.Log("zdec");
             point.x = 0;
             Teleport(point);
+
         }
         if (point.y < 0)
-        { 
+        {
             point.y = 1;
-            Teleport(point);
+            TeleportYZero(point);
+            return;
         }
-        if (point.y > 1)
+        if (point.y > Screen.height)
         {
             point.y = 0;
             Teleport(point);
+            return;
         }
 
     }
 
-    private void Teleport(Vector3 point)
+    private void TeleportXZero(Vector3 point)
     {
-        Debug.Log(point);
-       transform.localPosition = Camera.main.WorldToViewportPoint(point);
+        Vector3 world = Camera.main.ScreenToWorldPoint(point);
+        world.z = 0;
+        world.x = -world.x;
+        transform.localPosition = world;
+
     }
 
-    
+    private void TeleportYZero(Vector3 point)
+    {
+        Vector3 world = Camera.main.ScreenToWorldPoint(point);
+        world.z = 0;
+        world.y = -world.y;
+        transform.localPosition = world;
+    }
+
+
+    private void Teleport(Vector3 point)
+    {
+        Vector3 world = Camera.main.ScreenToWorldPoint(point);
+        world.z = 0;
+        transform.localPosition = world;
+    }
 }
