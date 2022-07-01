@@ -298,12 +298,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dff9274a73055584cba3dad3c88d8eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemy: {fileID: 0}
   _vectorAsteroidMove: {fileID: 1905037324}
   _shipFactory: {fileID: 11400000, guid: 2e01a7a6595ab2140ba4487a0e6ec463, type: 2}
   _type: 1
   _scenario: {fileID: 11400000, guid: 91bde44a8ede39f4aaed5e67576e1bab, type: 2}
   _enemyFactory: {fileID: 11400000, guid: 11e3c0088f39f444a8d52c4d041d279a, type: 2}
+  _warFactory: {fileID: 11400000, guid: 20a6d10aef265d44e83fa5e056c73927, type: 2}
   _spawnCoord:
   - {fileID: 560241874}
   - {fileID: 658969588}

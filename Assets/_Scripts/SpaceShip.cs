@@ -5,6 +5,8 @@ using UnityEngine;
 public class SpaceShip : GameBehavior
 {
     [SerializeField] private Transform _model;
+    [SerializeField] private Transform _spawnShellCoord;
+    [SerializeField, Range(0.05f, 0.4f)] private float _speedShell = 0.2f;
     private float _speedMax;
     private float _speed;
     private float _speedRotate;
@@ -39,8 +41,17 @@ public class SpaceShip : GameBehavior
 
     public void SpawnOn()
     {
-        _model.localPosition = new Vector3(0,0,0);
+        _model.localPosition = Vector3.zero;
     }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Shoot();
+        }
+    }
+
     public void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.W))
@@ -66,11 +77,12 @@ public class SpaceShip : GameBehavior
             RotateShip(-_speedRotate);
         }
     }
-    public void PhysicsUpdate()
-    {
-        
 
+    private void Shoot()
+    {
+        Game.SpawnShell().Initialize(_spawnShellCoord , _speedShell);
     }
+
     private void MoveInertia()
     {
         transform.Translate(_rememberVector * _inertia, Space.World);

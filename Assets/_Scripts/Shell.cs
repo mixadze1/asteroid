@@ -2,17 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shell : MonoBehaviour
+public class Shell : GameBehavior
 {
-    // Start is called before the first frame update
-    void Start()
+    private Vector3 _launchPoint, _targetPoint, _launchVelocity;
+    private float _speed;
+
+    public ShellFactory OriginFactory { get; set; }
+
+    public void  Initialize(Transform spawn, float speed)
     {
-        
+        transform.localPosition = spawn.position;
+        transform.rotation = spawn.rotation;
+        _speed = speed;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        transform.Translate(transform.up * _speed, Space.World);
     }
+
+    public override void Recycle()
+    {
+        OriginFactory.Reclaim(this);
+}
 }
