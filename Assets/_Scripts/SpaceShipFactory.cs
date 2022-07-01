@@ -54,7 +54,7 @@ public class SpaceShipFactory : GameObjectFactory
     }
 
     public void Reclaim(SpaceShip ship)
-    {
+    {if (ship.gameObject != null)
         Destroy(ship.gameObject);
     }
 }
