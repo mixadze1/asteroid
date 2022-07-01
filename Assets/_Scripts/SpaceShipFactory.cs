@@ -52,4 +52,9 @@ public class SpaceShipFactory : GameObjectFactory
         }
         return _whiteSpaceShip;
     }
+
+    public void Reclaim(SpaceShip ship)
+    {
+        Destroy(ship.gameObject);
+    }
 }
