@@ -31,6 +31,10 @@ public class Enemy : GameBehavior
 
     public void Update()
     {
+        if(Health <= 0)
+        {
+            Recycle();
+        }
         if (_startPosition.x < 0)
             transform.position = new Vector3(transform.localPosition.x + 0.005f, Mathf.Sin(Time.fixedTime) * 1f + offset, transform.localPosition.z);
         else
@@ -38,8 +42,13 @@ public class Enemy : GameBehavior
 
     }
 
+    public void TakeDamage(float damage)
+    {
+        Health -= damage;
+    }
+
     public override void Recycle()
     {
-        throw new System.NotImplementedException();
+        OriginFactory.Reclaim(this);
     }
 }

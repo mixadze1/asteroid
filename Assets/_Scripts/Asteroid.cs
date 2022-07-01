@@ -28,24 +28,32 @@ public class Asteroid : GameBehavior
         Health = health;
     }
 
-    public void SpawnOn(Transform position, Transform asteroidMove)
+    public void SpawnAsteroid(Vector3 position, Transform asteroidMove)
     {
-        _model.localPosition = position.position;
+        _model.localPosition = position;
         _moveTo = asteroidMove;
         _startPosition = _model.localPosition;
     }   
 
+    public void SpawnSmallAsteroid()
+    {
+        
+    }
+
     public override bool GameUpdate()
     {
+        Debug.Log("tut");
         if (Health <= 0)
         {
             if (Type == AsteroidType.Large)
             {
-
+                Recycle();
+                Game.SpawnAsteroidAfterDieBigAsteroid(this.transform.position, AsteroidType.Medium);
             }
             if (Type == AsteroidType.Medium)
             {
-
+                Recycle();
+                Game.SpawnAsteroidAfterDieBigAsteroid(this.transform.position, AsteroidType.Small);
             }
             if (Type == AsteroidType.Small)
             {

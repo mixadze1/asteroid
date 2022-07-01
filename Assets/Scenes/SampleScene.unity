@@ -298,6 +298,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dff9274a73055584cba3dad3c88d8eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _asteroidFactory: {fileID: 11400000, guid: 9c57f5911a39a2347af8f09c6148502a, type: 2}
   _vectorAsteroidMove: {fileID: 1905037324}
   _shipFactory: {fileID: 11400000, guid: 2e01a7a6595ab2140ba4487a0e6ec463, type: 2}
   _type: 1
@@ -439,7 +440,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1905037323
 SpriteRenderer:
   m_ObjectHideFlags: 0

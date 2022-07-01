@@ -20,7 +20,7 @@ MonoBehaviour:
     Health: 3
     Inertia: 0.03
     Damage: 1
-    Scale: 0.1593
+    Scale: 0.1023
     SpeedDamping: 0.96
   _blackSpacekShip:
     Prefab: {fileID: 6017981731566442606, guid: 831782af525614e49895a79a666021cc, type: 3}

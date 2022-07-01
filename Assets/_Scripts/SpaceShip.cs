@@ -13,7 +13,8 @@ public class SpaceShip : GameBehavior
     private float _pathOffset;
     private float _inertia;
     private float _speedDamping;
-
+    private float _scale;
+    private float _health;
     private float _currentSpeed;
 
     private Vector3 _rememberVector;
@@ -21,8 +22,7 @@ public class SpaceShip : GameBehavior
     private bool _isImmortal;
     private bool _isStartGame = true;
 
-    public float Scale { get; private set; }
-    public float Health { get; private set; }
+  
     public float Damage { get; private set; }
   
 
@@ -33,8 +33,8 @@ public class SpaceShip : GameBehavior
         _model.localScale = new Vector3(scale, scale, scale);
         _speed = speed;
         _inertia = inertia;
-        Health = health;
-        Scale = scale;
+        _health = health;
+        _scale = scale;
         Damage = damage;
         _speedDamping = speedDamping;
     }
@@ -46,6 +46,12 @@ public class SpaceShip : GameBehavior
 
     public void Update()
     {
+       if (_health <= 0)
+        {
+            Destroy(this.gameObject);
+            Debug.Log("lose");
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             Shoot();
@@ -78,9 +84,15 @@ public class SpaceShip : GameBehavior
         }
     }
 
+    public void TakeDamage(float damage)
+    {
+        Debug.Log(_health);
+        _health -= damage;
+    }
+
     private void Shoot()
     {
-        Game.SpawnShell().Initialize(_spawnShellCoord , _speedShell);
+        Game.SpawnShell().Initialize(_spawnShellCoord , _speedShell, Damage);
     }
 
     private void MoveInertia()

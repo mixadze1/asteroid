@@ -20,16 +20,32 @@ MonoBehaviour:
   - _factory: {fileID: 11400000, guid: 9c57f5911a39a2347af8f09c6148502a, type: 2}
     _type: 2
     _amount: 3
-    _cooldown: 4
+    _cooldown: 0
+  - _factory: {fileID: 11400000, guid: 9c57f5911a39a2347af8f09c6148502a, type: 2}
+    _type: 2
+    _amount: 4
+    _cooldown: 0
   - _factory: {fileID: 11400000, guid: 9c57f5911a39a2347af8f09c6148502a, type: 2}
     _type: 1
-    _amount: 4
-    _cooldown: 0.99
+    _amount: 5
+    _cooldown: 0
   - _factory: {fileID: 11400000, guid: 9c57f5911a39a2347af8f09c6148502a, type: 2}
     _type: 2
-    _amount: 5
-    _cooldown: 1
+    _amount: 6
+    _cooldown: 0
+  - _factory: {fileID: 11400000, guid: 9c57f5911a39a2347af8f09c6148502a, type: 2}
+    _type: 1
+    _amount: 7
+    _cooldown: 0
   - _factory: {fileID: 11400000, guid: 9c57f5911a39a2347af8f09c6148502a, type: 2}
     _type: 2
-    _amount: 5
-    _cooldown: 1
+    _amount: 8
+    _cooldown: 0
+  - _factory: {fileID: 11400000, guid: 9c57f5911a39a2347af8f09c6148502a, type: 2}
+    _type: 1
+    _amount: 9
+    _cooldown: 0
+  - _factory: {fileID: 11400000, guid: 9c57f5911a39a2347af8f09c6148502a, type: 2}
+    _type: 2
+    _amount: 10
+    _cooldown: 0

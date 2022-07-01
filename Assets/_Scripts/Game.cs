@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Game : MonoBehaviour
 {
+    [SerializeField]
+    private AsteroidFactory _asteroidFactory;
     [SerializeField] private Transform _vectorAsteroidMove;
     [SerializeField] private SpaceShipFactory _shipFactory;
     [SerializeField] private SpaceShipType _type;
@@ -88,11 +90,22 @@ public class Game : MonoBehaviour
 
     public static void SpawnAsteroid(AsteroidFactory factory, AsteroidType type)
     {
-        Transform transforms = _instance._spawnCoord[Random.Range(0,_instance._spawnCoord.Count - 1)];
+        Vector3 position = _instance._spawnCoord[Random.Range(0,_instance._spawnCoord.Count - 1)].position;
         Asteroid asteroid = factory.Get(type);
-        asteroid.SpawnOn(transforms, _instance._vectorAsteroidMove);
+        asteroid.SpawnAsteroid(position, _instance._vectorAsteroidMove);
        _instance._asteroid.Add(asteroid); 
-      
+    }
+
+    public static void SpawnAsteroidAfterDieBigAsteroid(Vector3 position, AsteroidType type)
+    {
+        Asteroid asteroid = _instance._asteroidFactory.Get(type);
+        Asteroid asteroid2 = _instance._asteroidFactory.Get(type);
+
+        asteroid.SpawnAsteroid(position, _instance._vectorAsteroidMove);
+        asteroid2.SpawnAsteroid(position, _instance._vectorAsteroidMove);
+
+        _instance._asteroid.Add(asteroid);
+        _instance._asteroid.Add(asteroid2);
     }
 
     private IEnumerator PrepareRoutine()

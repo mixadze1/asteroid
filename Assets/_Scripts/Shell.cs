@@ -4,16 +4,18 @@ using UnityEngine;
 
 public class Shell : GameBehavior
 {
-    private Vector3 _launchPoint, _targetPoint, _launchVelocity;
+    [SerializeField] private TargetPointCheckEnemy _targetPoint;
     private float _speed;
 
     public ShellFactory OriginFactory { get; set; }
 
-    public void  Initialize(Transform spawn, float speed)
+    public void  Initialize(Transform spawn, float speed, float damage)
     {
         transform.localPosition = spawn.position;
         transform.rotation = spawn.rotation;
         _speed = speed;
+        _targetPoint.Init(damage);
+        
     }
 
     private void Update()

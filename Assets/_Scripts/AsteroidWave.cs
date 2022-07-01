@@ -26,9 +26,8 @@ public class AsteroidWave : ScriptableObject
 
         public float Progress(float deltaTime, GameBehaviorCollection asteroid)
         {
-         /*   if (asteroid.IsEmpty)
-            {*/
-                deltaTime = _sequence.Progress(deltaTime);
+           
+                deltaTime = _sequence.Progress(deltaTime, asteroid);
                 while (deltaTime >= 0f)
                 {
                     if (++_index >= _wave._spawnSequences.Length)
@@ -36,10 +35,10 @@ public class AsteroidWave : ScriptableObject
                         return deltaTime;
                     }
                     _sequence = _wave._spawnSequences[_index].Begin();
-                    deltaTime = _sequence.Progress(deltaTime);
+                    deltaTime = _sequence.Progress(deltaTime, asteroid);
                 }
                 
-            //}
+            
             return -1f;
         }
     }

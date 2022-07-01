@@ -21,18 +21,21 @@ public class AsteroidSpawnSequence
             _count = 0;
             _cooldown = sequence._cooldown;
         }
-        public float Progress(float deltaTime)
+        public float Progress(float deltaTime, GameBehaviorCollection asteroid)
         {
-            _cooldown += deltaTime;
-            while (_cooldown > _sequence._cooldown)
+            if (asteroid.IsEmpty)
             {
-                _cooldown -= _sequence._cooldown;
-                if (_count >= _sequence._amount)
+                _cooldown += deltaTime;
+                while (_cooldown > _sequence._cooldown)
                 {
-                    return _cooldown;
+                    _cooldown -= _sequence._cooldown;
+                    if (_count >= _sequence._amount)
+                    {
+                        return _cooldown;
+                    }
+                    _count++;
+                    Game.SpawnAsteroid(_sequence._factory, _sequence._type);
                 }
-                _count++;
-                Game.SpawnAsteroid(_sequence._factory, _sequence._type);
             }
             return -1f;
         }
