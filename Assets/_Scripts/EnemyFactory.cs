@@ -2,14 +2,13 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 [CreateAssetMenu]
-public class AsteroidFactory : GameObjectFactory
+public class EnemyFactory : GameObjectFactory
 {
     [Serializable]
-    class AsteroidConfig
+    class EnemyConfig
     {
-        public Asteroid Prefab;
+        public Enemy Prefab;
         [FloatRangeSlider(0.5f, 2f)]
         public FloatRange Scale = new FloatRange(1f);
         [FloatRangeSlider(-0.4f, 0.4f)]
@@ -20,35 +19,31 @@ public class AsteroidFactory : GameObjectFactory
         public FloatRange Health = new FloatRange(0);
     }
 
-    [SerializeField] private AsteroidConfig _small, _medium, _large;
+    [SerializeField] private EnemyConfig _nlo;
 
-    public Asteroid Get(AsteroidType type)
+    public Enemy Get(EnemyType type)
     {
         var config = GetConfig(type);
-        Asteroid instance = CreateGameObjectInstance(config.Prefab);
+        Enemy instance = CreateGameObjectInstance(config.Prefab);
         instance.OriginFactory = this;
-        instance.Type = type;
         instance.Initialize(config.Scale.RandomValueInRange, config.PathOffset.RandomValueInRange,
             config.Speed.RandomValueInRange, config.Health.RandomValueInRange);
         return instance;
     }
 
-    private AsteroidConfig GetConfig(AsteroidType type)
+    private EnemyConfig GetConfig(EnemyType type)
     {
         switch (type)
         {
-            case AsteroidType.Large:
-                return _large;
-            case AsteroidType.Small:
-                return _small;
-            case AsteroidType.Medium:
-                return _medium;
+            case EnemyType.NLO:
+                return _nlo;
+
         }
-        return _medium;
+        return _nlo;
     }
-    public void Reclaim(Asteroid enemy)
+
+    public void Reclaim(Enemy enemy)
     {
         Destroy(enemy.gameObject);
     }
 }
-

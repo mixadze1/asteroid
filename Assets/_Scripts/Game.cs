@@ -8,14 +8,16 @@ public class Game : MonoBehaviour
     [SerializeField] private SpaceShipFactory _shipFactory;
     [SerializeField] private SpaceShipType _type;
     [SerializeField] private GameScenario _scenario;
+    [SerializeField] private EnemyFactory _enemyFactory;
     [SerializeField] private List<Transform> _spawnCoord = new List<Transform>();
+    [SerializeField, Range(1f, 40f)] private float _timeToSpawnNlo = 5f;
     [SerializeField, Range(1f, 15f)] private float _prepareTime = 10f;
    
-    private GameScenario.State _activateScenario;
-    private SpaceShip _playerMove;
+    private GameScenario.State _activateScenarioAsteroid;
     private PlayerShoot _playerShoot;
 
     private Coroutine _prepareRoutine;
+    private Coroutine _prepareRoutineNlo;
 
     private GameBehaviorCollection _asteroid = new GameBehaviorCollection();
     private GameBehaviorCollection _spaceShip = new GameBehaviorCollection();
@@ -33,6 +35,7 @@ public class Game : MonoBehaviour
     {
         BeginNewGame();
     }
+
     private void Update()
     {
         if (_isGetReady)
@@ -42,17 +45,13 @@ public class Game : MonoBehaviour
         }
         if (_scenarioInProcess)
         {
-            if (!_activateScenario.Progress() && _asteroid.IsEmpty)
+            if (!_activateScenarioAsteroid.Progress(_asteroid) && _asteroid.IsEmpty)
             {
                 //win
             }
             _asteroid.GameUpdate();
         }
       
-    }
-    private void FixedUpdate()
-    {
-        //_playerMove.PhysicsUpdate();
     }
     
     private void BeginNewGame()
@@ -63,12 +62,21 @@ public class Game : MonoBehaviour
             StopCoroutine(_prepareRoutine);
         }
         CreatePlayer();
+       StartCoroutine( CreateNlo());
     }
 
     private void CreatePlayer()
     {
         SpaceShip spaceShip = _shipFactory.Get(_type);
         spaceShip.SpawnOn();
+    }
+
+    private IEnumerator CreateNlo()
+    {
+        yield return new WaitForSeconds(_timeToSpawnNlo);
+        Debug.Log("tut");
+        Enemy enemy = _enemyFactory.Get(EnemyType.NLO);
+        enemy.SpawnOn(_spawnCoord[Random.Range(0, _instance._spawnCoord.Count - 1)]);
     }
 
     public static void SpawnAsteroid(AsteroidFactory factory, AsteroidType type)
@@ -84,7 +92,7 @@ public class Game : MonoBehaviour
     {
         yield return new WaitForSeconds(_prepareTime);
 
-        _activateScenario = _scenario.Begin();
+        _activateScenarioAsteroid = _scenario.Begin();
         _scenarioInProcess = true;
     }
 }

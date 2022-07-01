@@ -24,14 +24,14 @@ MonoBehaviour:
     SpeedDamping: 0.96
   _blackSpacekShip:
     Prefab: {fileID: 6017981731566442606, guid: 831782af525614e49895a79a666021cc, type: 3}
-    SpeedMax: 0
-    Speed: 0
-    SpeedRotatePlayer: 0
-    Health: 0
-    Inertia: 0.03
-    Damage: 0
-    Scale: 0
-    SpeedDamping: 0
+    SpeedMax: 0.846
+    Speed: 0.667
+    SpeedRotatePlayer: 6.67
+    Health: 1
+    Inertia: 0.0677
+    Damage: 1
+    Scale: 0.2
+    SpeedDamping: 0.99
   _fastSpaceShip:
     Prefab: {fileID: 6017981731566442606, guid: 831782af525614e49895a79a666021cc, type: 3}
     SpeedMax: 0

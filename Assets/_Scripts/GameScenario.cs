@@ -19,18 +19,18 @@ public class GameScenario : ScriptableObject
             _index = 0;
             _wave = _scenario._waves[0].Begin();
         }
-        public bool Progress()
+        public bool Progress(GameBehaviorCollection asteroid)
         {
-            float deltaTime = _wave.Progress(Time.deltaTime);
-            while (deltaTime >= 0f)
-            {
-                if (++_index >= _scenario._waves.Length)
+                float deltaTime = _wave.Progress(Time.deltaTime, asteroid);
+                while (deltaTime >= 0f)
                 {
-                    return false;
+                    if (++_index >= _scenario._waves.Length)
+                    {
+                        return false;
+                    }
+                    _wave = _scenario._waves[_index].Begin();
+                    deltaTime = _wave.Progress(deltaTime, asteroid);
                 }
-                _wave = _scenario._waves[_index].Begin();
-                deltaTime = _wave.Progress(deltaTime);
-            }
             return true;
         }
     }
