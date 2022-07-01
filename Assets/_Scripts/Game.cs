@@ -28,7 +28,7 @@ public class Game : MonoBehaviour
     private bool _scenarioInProcess;
     private bool _isNotLose;
     public static Game _instance;
-    private GameControl _gameControl = GameControl.Mouse;
+    private GameControl _gameControl = GameControl.KeyBoard;
 
    public  GameControl GameControl { get => _gameControl; set => _gameControl = value; }
 
@@ -75,7 +75,11 @@ public class Game : MonoBehaviour
         {
             StopCoroutine(_prepareRoutineNlo);
         }
-        _spaceShip.Clear();
+        if (_spaceShip!=null)
+        {
+            _spaceShip.Clear();
+        }
+       
         _nlo.Clear();
         _asteroid.Clear();
         CreatePlayer(_gameControl); 

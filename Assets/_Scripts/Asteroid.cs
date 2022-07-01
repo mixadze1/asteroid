@@ -48,14 +48,17 @@ public class Asteroid : GameBehavior
             {
                 Recycle();
                 Game.SpawnAsteroidAfterDieBigAsteroid(this.transform.position, AsteroidType.Medium);
+                GUIManager._instance.Score += 20;
             }
             if (Type == AsteroidType.Medium)
             {
                 Recycle();
                 Game.SpawnAsteroidAfterDieBigAsteroid(this.transform.position, AsteroidType.Small);
+                GUIManager._instance.Score += 50;
             }
             if (Type == AsteroidType.Small)
             {
+                GUIManager._instance.Score += 100;
                 Recycle();
             }
             return false;

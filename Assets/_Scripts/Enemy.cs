@@ -40,6 +40,7 @@ public class Enemy : GameBehavior
     {
         if(Health <= 0)
         {
+            GUIManager._instance.Score += 200;
             Recycle();
         }
         if (_startPosition.x < 0)
