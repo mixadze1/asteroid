@@ -9,6 +9,8 @@ public class TargetPointCheckSpaceShip : MonoBehaviour
         if (collision.GetComponent<SpaceShip>())
         {
             collision.GetComponent<SpaceShip>()?.TakeDamage(_damageEnemy);
+            if (gameObject.GetComponent<Shell>())
+                Destroy(gameObject);
         }
     }
 }

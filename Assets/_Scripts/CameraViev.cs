@@ -9,17 +9,14 @@ public class CameraViev : MonoBehaviour
     public void LateUpdate()
     {
         Vector3 point = Camera.main.WorldToScreenPoint(transform.position);
-        Debug.Log(point);
         if (point.x < 0)
         {
             point.x = 1;
-            Debug.Log("tut");
             TeleportXZero(point);
         }
 
         if (point.x > Screen.width)
         {
-            Debug.Log("zdec");
             point.x = 0;
             Teleport(point);
 

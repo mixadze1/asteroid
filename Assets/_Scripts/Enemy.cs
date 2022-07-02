@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : GameBehavior
 {
     [SerializeField] private Transform _spawnShellCoord;
-    private float _speedShell = 0.03f;
+    private float _speedShell = 8;
     private Transform _model;
     private float _timeToShoot = 3f;
     private float _pathOffset;
@@ -26,14 +26,13 @@ public class Enemy : GameBehavior
         _pathOffset = pathOffset;
         _speed = speed;
         Health = health;
-       _target = FindObjectOfType<SpaceShip>();
     }
 
     public void SpawnOn(Transform transform)
     {
         _model.localPosition = transform.localPosition;
         _startPosition = transform.position ;
-        //StartCoroutine(Shoot());
+        StartCoroutine(Shoot());
     }
 
     public void Update()
@@ -56,7 +55,7 @@ public class Enemy : GameBehavior
         {
             Debug.Log("tut");
             yield return new WaitForSeconds(_timeToShoot);
-            Game.SpawnShell()?.Initialize(_spawnShellCoord, _speedShell, _damage, Color.red,_target.transform);
+            Game.SpawnShell(false)?.Initialize(_spawnShellCoord, _speedShell, _damage, Color.red,false);
         }
        
     }

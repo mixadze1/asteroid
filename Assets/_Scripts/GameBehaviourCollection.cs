@@ -27,8 +27,10 @@ public class GameBehaviorCollection
     {
         for (int i = 0; i < _behaviors.Count; i++)
         {
-            _behaviors[i].Recycle();
+            if(_behaviors[i] != null )
+                _behaviors[i].Recycle();
         }
-        _behaviors.Clear();
+        if (_behaviors != null)
+            _behaviors.Clear();
     }
 }

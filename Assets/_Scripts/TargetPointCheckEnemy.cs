@@ -4,27 +4,23 @@ using UnityEngine;
 
 public partial class TargetPointCheckEnemy : MonoBehaviour
 {
-    private float _damage;
+    private float _damage = 1f;
    
 
-    public void Init(float damage)
-    {
-        _damage = damage;
-    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
+        Debug.Log("zdec");
         if (collision.GetComponent<Enemy>())
-        {
+        {    
             collision.GetComponent<Enemy>().TakeDamage(_damage);
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
 
         if (collision.GetComponent<Asteroid>())
         {
             collision.GetComponent<Asteroid>().TakeDamage(_damage);
-            gameObject.SetActive(false);
+            Destroy(gameObject);
         }
     }
 }

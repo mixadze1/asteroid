@@ -6,7 +6,7 @@ public class SpaceShip : GameBehavior
 {
     [SerializeField] private Transform _model;
     [SerializeField] private Transform _spawnShellCoord;
-    [SerializeField, Range(0.05f, 0.4f)] private float _speedShell = 0.2f;
+    [SerializeField, Range(0.05f, 0.4f)] private float _speedShell = 0.1f;
     private float _speedMax;
     private float _speed;
     private float _speedRotate;
@@ -144,7 +144,7 @@ public class SpaceShip : GameBehavior
 
     private void Shoot()
     {
-        Game.SpawnShell().Initialize(_spawnShellCoord, _speedShell, Damage, Color.red, null);
+        Game.SpawnShell(true).Initialize(_spawnShellCoord, _speedShell, Damage, Color.red,true);
     }
 
     private void MoveInertia()

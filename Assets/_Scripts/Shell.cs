@@ -8,38 +8,55 @@ public class Shell : GameBehavior
     private float _speed;
     private Color _color;
     private Transform _target;
-
+    private SpaceShip _ship;
+    private bool _isPlayer;
+    private Vector3 _positionShip;
     public ShellFactory OriginFactory { get; set; }
 
-    public void  Initialize(Transform spawn, float speed, float damage, Color color, Transform target)
-    {
+    public void  Initialize(Transform spawn, float speed, float damage, Color color, bool isPlayer)
+    {  
         _color = color;
         transform.localPosition = spawn.position;
         transform.rotation = spawn.rotation;
         _speed = speed;
-        _targetPoint.Init(damage);
-        _target = target;
-        if (_target != null)
-        {
-            ShootPlayer();
-        }
+        _isPlayer = isPlayer;
+        if (!isPlayer)
+            FindPlayer();
+
     }
 
     private void Update()
     {
-        if (_target == null)
-            transform.Translate(transform.up * _speed, Space.World);
+        if (_isPlayer)
+        transform.Translate(transform.up * _speed, Space.World);
 
+        if (_ship != null)
+        {
+            ShellMoveToPlayer();    
+        }
+       
     }
 
-    private void ShootPlayer()
+    private void FindPlayer()
     {
-        //_model.transform.position.Lerp(transform.position, _target.transform.position, 0.5f);
+        _ship = FindObjectOfType<SpaceShip>();
+        if(_ship != null)
+            _positionShip = _ship.transform.position;
+    }
+
+    private void ShellMoveToPlayer()
+    {
+        if (_ship != null)
+        {
+            transform.rotation = _ship.transform.rotation;
+            transform.position += (_positionShip - transform.position).normalized * 8 * Time.deltaTime;
+            if ((_positionShip - transform.position).sqrMagnitude < 0.01f) Destroy(gameObject);
+        }
     }
 
     public override void Recycle()
     {
-        
-        OriginFactory.Reclaim(this);
+        if (this.gameObject != null)
+            OriginFactory.Reclaim(this);
 }
 }

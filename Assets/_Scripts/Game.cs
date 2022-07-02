@@ -6,12 +6,12 @@ public class Game : MonoBehaviour
 {
     [SerializeField] private AsteroidFactory _asteroidFactory;
     [SerializeField] private Transform _vectorAsteroidMove;
-    [SerializeField] private SpaceShipFactory _shipFactory;
-    [SerializeField] private SpaceShipType _type;
+    [SerializeField] private SpaceShipFactory _shipFactory;    
     [SerializeField] private GameScenario _scenario;
     [SerializeField] private EnemyFactory _enemyFactory;
     [SerializeField] private ShellFactory _warFactory;
     [SerializeField] private Menu _menu;
+    [SerializeField] private SpaceShipType _type;
     [SerializeField] private List<Transform> _spawnCoord = new List<Transform>();
     [SerializeField, Range(1f, 40f)] private float _timeToSpawnNlo = 5f;
     [SerializeField, Range(1f, 15f)] private float _prepareTime = 10f;
@@ -20,10 +20,12 @@ public class Game : MonoBehaviour
 
     private Coroutine _prepareRoutine;
     private Coroutine _prepareRoutineNlo;
+
     private GameBehaviorCollection _nlo = new GameBehaviorCollection();
     private GameBehaviorCollection _asteroid = new GameBehaviorCollection();
     private GameBehaviorCollection _spaceShip = new GameBehaviorCollection();
-    private GameBehaviorCollection _nonEnemies = new GameBehaviorCollection();
+    private GameBehaviorCollection _shell = new GameBehaviorCollection();
+
     private bool _isGetReady = true;
     private bool _scenarioInProcess;
     private bool _isNotLose;
@@ -75,11 +77,14 @@ public class Game : MonoBehaviour
         {
             StopCoroutine(_prepareRoutineNlo);
         }
-        if (_spaceShip!=null)
+        if (_spaceShip != null)
         {
             _spaceShip.Clear();
         }
-       
+        if (_shell != null)
+        {
+           // _shell.Clear();
+        }       
         _nlo.Clear();
         _asteroid.Clear();
         CreatePlayer(_gameControl); 
@@ -106,11 +111,20 @@ public class Game : MonoBehaviour
        
     }
 
-    public static Shell SpawnShell()
+    public static Shell SpawnShell(bool isPlayerShell)
     {
-        Shell shell = _instance._warFactory.Shell;
-        _instance._nonEnemies.Add(shell);
-        return shell;
+        if(isPlayerShell)
+        {
+            Shell shell = _instance._warFactory.Shell;
+            _instance._shell.Add(shell);
+            return shell;
+        }
+        else
+        {
+            Shell shell = _instance._warFactory.ShellEnemy;
+            _instance._shell.Add(shell);
+            return shell;
+        }      
     }
 
     public static void SpawnAsteroid(AsteroidFactory factory, AsteroidType type)

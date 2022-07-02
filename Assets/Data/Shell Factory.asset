@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: Shell Factory
   m_EditorClassIdentifier: 
   _shellPrefab: {fileID: 161522401194839290, guid: a00122fd3f5b25f439099f6bce555b29, type: 3}
+  _shellEnemyPrefab: {fileID: 161522401194839290, guid: 55749074ba531084695e009e0514b860, type: 3}

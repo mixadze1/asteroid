@@ -603,7 +603,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 304038157}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.304724, y: 4.6533847, z: 0}
+  m_LocalPosition: {x: 10.02, y: 6.08, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1053,7 +1053,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 528533388}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.105276, y: -5.3766155, z: 0}
+  m_LocalPosition: {x: -14.13, y: -7.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1219,7 +1219,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1004184462}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 8.304724, y: -5.3766155, z: 0}
+  m_LocalPosition: {x: 9.31, y: -8.35, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1822,7 +1822,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1421149542}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -12.105276, y: 4.6233845, z: 0}
+  m_LocalPosition: {x: -13.51, y: 6.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2092,7 +2092,7 @@ RectTransform:
   m_Children:
   - {fileID: 152415605}
   m_Father: {fileID: 2009564982}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -2226,7 +2226,7 @@ RectTransform:
   m_Children:
   - {fileID: 1129631014}
   m_Father: {fileID: 2009564982}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
@@ -2536,8 +2536,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1271345784}
-  - {fileID: 1578036304}
   - {fileID: 1729312760}
+  - {fileID: 1578036304}
   - {fileID: 435193585}
   - {fileID: 1011495381}
   m_Father: {fileID: 383759260}
@@ -2580,11 +2580,11 @@ MonoBehaviour:
   _asteroidFactory: {fileID: 11400000, guid: 9c57f5911a39a2347af8f09c6148502a, type: 2}
   _vectorAsteroidMove: {fileID: 1890522651}
   _shipFactory: {fileID: 11400000, guid: 2e01a7a6595ab2140ba4487a0e6ec463, type: 2}
-  _type: 1
   _scenario: {fileID: 11400000, guid: 91bde44a8ede39f4aaed5e67576e1bab, type: 2}
   _enemyFactory: {fileID: 11400000, guid: 11e3c0088f39f444a8d52c4d041d279a, type: 2}
   _warFactory: {fileID: 11400000, guid: 20a6d10aef265d44e83fa5e056c73927, type: 2}
   _menu: {fileID: 1900721464}
+  _type: 1
   _spawnCoord:
   - {fileID: 1421149543}
   - {fileID: 528533389}
