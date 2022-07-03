@@ -4,10 +4,25 @@ public class GameBehaviorCollection
 {
     private List<GameBehavior> _behaviors = new List<GameBehavior>();
     public bool IsEmpty => _behaviors.Count == 0;
+    public int IsLength => _behaviors.Count;
 
     public void Add(GameBehavior asteroid)
     {
         _behaviors.Add(asteroid);
+    }
+
+    public GameBehavior SearchFreeInPoolAsteroid(AsteroidType type)
+    {
+        foreach(var behavior in _behaviors)
+        {
+            if (behavior.gameObject.activeSelf == false)
+            {
+                behavior.gameObject.SetActive(true);
+                return behavior;
+            }
+            
+        }
+        return null;
     }
 
     public void GameUpdate()

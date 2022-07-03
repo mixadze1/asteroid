@@ -34,6 +34,7 @@ public class AsteroidSpawnSequence
                         return _cooldown;
                     }
                     _count++;
+                    
                     Game.SpawnAsteroid(_sequence._factory, _sequence._type);
                 }
             }
