@@ -54,6 +54,7 @@ public class SpaceShip : GameBehavior
     {
         if (_health <= 0)
         {
+            SfxAudio.Instance.DieSpaceShip.Play();
             Destroy(this.gameObject);
             Instantiate(_explosion, transform.position, Quaternion.identity);
         }
@@ -90,7 +91,6 @@ public class SpaceShip : GameBehavior
 
     public void FixedUpdate()
     {
-
         if (Input.GetKey(KeyCode.W))
         {
             _gas.gameObject.SetActive(true);
@@ -151,6 +151,7 @@ public class SpaceShip : GameBehavior
     private void Shoot()
     {
         Game.SpawnShell(true).Initialize(_spawnShell, _speedShell, Damage, true, _timeLiveShell);
+        SfxAudio.Instance.ShootAudioSource.Play();
     }
 
     private void MoveInertia()

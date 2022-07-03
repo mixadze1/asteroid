@@ -44,6 +44,7 @@ public class Asteroid : GameBehavior
     {
         if (Health <= 0)
         {
+            SfxAudio.Instance.DieAsteroid.Play();
             if (Type == AsteroidType.Large)
             {
                 Recycle();

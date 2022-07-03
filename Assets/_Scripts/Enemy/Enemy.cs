@@ -40,6 +40,7 @@ public class Enemy : GameBehavior
     {
         if(Health <= 0)
         {
+            SfxAudio.Instance.DieNlo.Play();
             Instantiate(_explosion,transform.position, Quaternion.identity);
             GUIManager._instance.Score += GUIManager._instance.NloScore;
             Recycle();
@@ -60,9 +61,9 @@ public class Enemy : GameBehavior
     private IEnumerator Shoot()
     {while(true)
         {
-            Debug.Log("tut");
             yield return new WaitForSeconds(_timeToShoot);
             Game.SpawnShell(false)?.Initialize(_spawnShellCoord, _speedShell, _damage, false, _timeLiveShell);
+            SfxAudio.Instance.ShootNlo.Play();
         }
        
     }
