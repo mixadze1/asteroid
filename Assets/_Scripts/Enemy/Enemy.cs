@@ -5,6 +5,7 @@ using UnityEngine;
 public class Enemy : GameBehavior
 {
     [SerializeField] private Transform _spawnShellCoord;
+    [SerializeField] private Transform _explosion;
     private float _speedShell = 8f;
     private Transform _model;
     private float _timeToShoot = 3f;
@@ -39,6 +40,7 @@ public class Enemy : GameBehavior
     {
         if(Health <= 0)
         {
+            Instantiate(_explosion,transform.position, Quaternion.identity);
             GUIManager._instance.Score += GUIManager._instance.NloScore;
             Recycle();
         }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Shell : GameBehavior
 {
-    [SerializeField] private TargetPointCheckEnemy _targetPoint;
+    [SerializeField] private TargetPointCheckAsteroid _targetPoint;
 
     private Transform _target;
     private SpaceShip _ship;

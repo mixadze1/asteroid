@@ -7,6 +7,7 @@ public class SpaceShip : GameBehavior
     [SerializeField] private Transform _modelShip;
     [SerializeField] private Transform _spawnShell;
     [SerializeField] private Transform _explosion;
+    [SerializeField] private Transform _gas;
 
     private float _speedShell;
     private float _speed;
@@ -92,6 +93,7 @@ public class SpaceShip : GameBehavior
 
         if (Input.GetKey(KeyCode.W))
         {
+            _gas.gameObject.SetActive(true);
             AccelerationShip();
         }
 
@@ -101,6 +103,7 @@ public class SpaceShip : GameBehavior
         }
         else if (!_isStartGame)
         {
+            _gas.gameObject.SetActive(false);
             MoveInertia();
         }
 
@@ -116,7 +119,6 @@ public class SpaceShip : GameBehavior
                 RotateShip(-_speedRotate);
             }
         }
-
     }
 
     private IEnumerator StartImmortal()

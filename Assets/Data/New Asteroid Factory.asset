@@ -21,8 +21,8 @@ MonoBehaviour:
       _min: 0
       _max: 0
     Speed:
-      _min: 0.3146398
-      _max: 0.42192113
+      _min: 0.2276192
+      _max: 0.2592034
     Health:
       _min: 1
       _max: 1

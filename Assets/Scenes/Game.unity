@@ -2322,7 +2322,7 @@ MonoBehaviour:
   - {fileID: 528533389}
   - {fileID: 1004184463}
   - {fileID: 304038158}
-  _timeToSpawnNlo: 25
+  _timeToSpawnNlo: 3
   _prepareTime: 1
 --- !u!4 &2030889393
 Transform:

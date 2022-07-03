@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TargetPointCheckEnemy : MonoBehaviour
+public partial class TargetPointCheckAsteroid : MonoBehaviour
 {
     private float _damage = 1f;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<Enemy>())
+       
+
+        if (collision.GetComponent<Asteroid>())
         {
-            collision.GetComponent<Enemy>().TakeDamage(_damage);
+            collision.GetComponent<Asteroid>().TakeDamage(_damage);
             Destroy(gameObject);
         }
-    
-}
+    }
 }

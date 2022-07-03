@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SpaceShipFactory
   m_EditorClassIdentifier: 
   _whiteSpaceShip:
-    Prefab: {fileID: 6017981731566442606, guid: 831782af525614e49895a79a666021cc, type: 3}
+    Prefab: {fileID: 6017981731566442606, guid: 58b77ad2275214b4fb7d517ec0212084, type: 3}
     SpeedMax: 0.35
     Speed: 0.117
     SpeedRotatePlayer: 2.61
@@ -21,12 +21,12 @@ MonoBehaviour:
     Health: 1
     Inertia: 0.03
     Damage: 1
-    Scale: 0.1023
+    Scale: 0.15
     TimeImmortal: 2.5
     TimeBlinking: 0.45
     TimeLiveShell: 3
   _blackSpacekShip:
-    Prefab: {fileID: 6017981731566442606, guid: 831782af525614e49895a79a666021cc, type: 3}
+    Prefab: {fileID: 6017981731566442606, guid: bc00364111577fb4d8bc0fd7a1bff02c, type: 3}
     SpeedMax: 0.282
     Speed: 0.667
     SpeedRotatePlayer: 6.67

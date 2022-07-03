@@ -24,7 +24,7 @@ public class SpaceShipFactory : GameObjectFactory
         public float Inertia = 0.03f;
         [Range(1f, 10f)]
         public float Damage;
-        [Range(0.1f, 0.2f)] 
+        [Range(0.1f, 2f)] 
         public float Scale;
         [Range(1f, 5f)]
         public float TimeImmortal;

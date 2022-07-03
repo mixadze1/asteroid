@@ -52,15 +52,14 @@ public class Game : MonoBehaviour
             _menuSetting.ActivateMenu();
         }
         if (_isGetReady)
-        {
-          
+        { 
             _isGetReady = false;
         }
         if (_scenarioInProcess)
         {
             if (!_activateScenarioAsteroid.Progress(_asteroid) && _asteroid.IsEmpty)
             {
-                //win
+                // TODO win
             }
             _asteroid.GameUpdate();
         }
@@ -69,6 +68,7 @@ public class Game : MonoBehaviour
 
     public void BeginNewGame()
     {
+        Time.timeScale = 1;
         _scenarioInProcess = false;
         if (_prepareRoutine != null)
         {
@@ -135,17 +135,17 @@ public class Game : MonoBehaviour
     {
         Vector3 position = _instance._spawnCoord[Random.Range(0,_instance._spawnCoord.Count - 1)].position;
         Asteroid asteroid = factory.Get(type);
-        asteroid.SpawnAsteroid(position, _instance._vectorAsteroidMove);
+        asteroid.SpawnAsteroid(position, _instance._vectorAsteroidMove, position);
        _instance._asteroid.Add(asteroid); 
     }
 
-    public static void SpawnAsteroidAfterDieBigAsteroid(Vector3 position, AsteroidType type)
+    public static void SpawnAsteroidAfterDieBigAsteroid(Vector3 position, AsteroidType type, Vector3 startPosition)
     {
         Asteroid asteroid = _instance._asteroidFactory.Get(type);
         Asteroid asteroid2 = _instance._asteroidFactory.Get(type);
 
-        asteroid.SpawnAsteroid(position, _instance._vectorAsteroidMove);
-        asteroid2.SpawnAsteroid(position, _instance._vectorAsteroidMove);
+        asteroid.SpawnAsteroid(position, _instance._vectorAsteroidMove, startPosition);
+        asteroid2.SpawnAsteroid(position, _instance._vectorAsteroidMove, startPosition);
 
         _instance._asteroid.Add(asteroid);
         _instance._asteroid.Add(asteroid2);

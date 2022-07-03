@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 9085897185324483536}
   - component: {fileID: 2082754423893430343}
   - component: {fileID: 2819015742835161683}
+  - component: {fileID: 3897297633425889184}
   m_Layer: 0
   m_Name: AsteroidSmall
   m_TagString: Untagged
@@ -78,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -72543091, guid: a9281f131619930489907d9120190b89, type: 3}
   m_Color: {r: 0.4811321, g: 0.18836774, b: 0.18836774, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -102,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _model: {fileID: 8874727568614466962}
+  _explosion: {fileID: 8756226310012120331, guid: ce98c86ecd107e8418581e37460b74d5, type: 3}
 --- !u!61 &9021997218460607832
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -119,7 +121,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.26, y: 1.32}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -171,5 +173,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 393243b996479f54ebd572c36287f336, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3897297633425889184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3954880392727844758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7acd4985a2ad6849bf8a2798e26f2d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
