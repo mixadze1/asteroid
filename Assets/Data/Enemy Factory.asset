@@ -17,9 +17,9 @@ MonoBehaviour:
     Scale:
       _min: 0.6
       _max: 0.6
-    PathOffset:
-      _min: 0
-      _max: 0
+    TimeToShoot:
+      _min: 3
+      _max: 3
     Speed:
       _min: 0.0025782206
       _max: 0.0025782206
@@ -29,3 +29,9 @@ MonoBehaviour:
     TimeLiveShell:
       _min: 3
       _max: 3
+    Damage:
+      _min: 1
+      _max: 1
+    SpeedShell:
+      _min: 8
+      _max: 8

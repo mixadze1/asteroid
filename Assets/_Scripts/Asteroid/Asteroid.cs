@@ -12,61 +12,59 @@ public class Asteroid : GameBehavior
     private float _moveX = 0.05f;
     private float _moveY = 0.05f;
     private float _correctSpeed = 0.1f;
-    private float _speed;
-
-    private float _bigExplosion = 1f;
-    private float _mediumExposion = 0.75f;
-    private float _smallExplosion = 0.5f;
   
-    private Transform _moveTo;
-    public float Scale { get; private set; }
-    public float Health { get; private set; }
-    public float Damage { get; private set; }
+    private float _health;
+    private float _speed;
+    private float _explosionSize;
+    private float _correctRotationZ;
+    private float _rotationZ;
+
     public AsteroidFactory OriginFactory { get; set; }
 
     public AsteroidType Type { get; set; }
 
-    public void Initialize(float scale, float speed, float health)
+    public void Initialize(float scale, float speed, float health, float explosion, float rotation)
     {
         _model.localScale = new Vector3(scale, scale, scale);
         _speed = speed;
-        Scale = scale;
-        Health = health;
-
+        _health = health;
+        _explosionSize = explosion;
+        _rotationZ = rotation;
     }
 
-    public void SpawnOn(Vector3 position, Transform asteroidMove, Vector3 startPosition)
+    public void SpawnOn(Vector3 position, float RotationZ, Vector3 startPosition, float correctRotation)
     {
         _model.localPosition = position;
-        _moveTo = asteroidMove;
         _startPosition = startPosition;
+        _correctRotationZ = correctRotation;
+        if (RotationZ != 0)
+            _rotationZ = RotationZ;
     }   
 
     public override bool GameUpdate()
     {
-        if (Health <= 0)
+        if (_health <= 0)
         {
             SfxAudio._instance.DieAsteroid.Play();
             if (Type == AsteroidType.Large)
             {
                 Recycle();
                 SpawnMediumAsteroid();
-                Explosion(_bigExplosion);
+                Explosion(_explosionSize);
                 GUIManager._instance.Score += GUIManager._instance.LargeAsteroidScore;
             }
             if (Type == AsteroidType.Medium)
             {
                 Recycle();
                 SpawnSmallAsteroid();
-                Explosion(_mediumExposion);
+                Explosion(_explosionSize);
                 GUIManager._instance.Score += GUIManager._instance.MediumAteroidScore;
             }
             if (Type == AsteroidType.Small)
             {
                 Recycle();
-                Explosion(_smallExplosion);
+                Explosion(_explosionSize);
                 GUIManager._instance.Score += GUIManager._instance.SmallAteroidScore;
-               
             }
             return false;
         }
@@ -76,13 +74,13 @@ public class Asteroid : GameBehavior
 
     private void SpawnMediumAsteroid()
     {    
-        Game.SpawnAsteroidAfterDieBigAsteroid(this.transform.position, AsteroidType.Medium, _startPosition);
+        Game.SpawnAsteroidAfterDieAsteroid(_rotationZ, AsteroidType.Medium, _startPosition, this.transform.position);
     }
 
     private void SpawnSmallAsteroid()
     {   
         Instantiate(_explosion, transform.position, Quaternion.identity);
-        Game.SpawnAsteroidAfterDieBigAsteroid(this.transform.position, AsteroidType.Small, _startPosition);
+        Game.SpawnAsteroidAfterDieAsteroid(_rotationZ, AsteroidType.Small, _startPosition, this.transform.position);
     }
 
     private void Explosion(float scale)
@@ -93,51 +91,13 @@ public class Asteroid : GameBehavior
 
     private void MoveAsteroid()
     {
-        if(_startPosition.x < 0 && _startPosition.y > 0)
-        {
-            MoveLeftDown();
-        }
-
-        if(_startPosition.x < 0 && _startPosition.y < 0)
-        {
-            MoveLeftUp();
-        }
-
-        if (_startPosition.x > 0 && _startPosition.y < 0)
-        {
-            MoveRightUp();
-        }
-
-        if (_startPosition.x > 0 && _startPosition.y > 0)
-        {
-            MoveRightDown();
-        }     
+        transform.rotation = Quaternion.Euler(0, 0, _rotationZ + _correctRotationZ);    
+        transform.position += transform.up * Time.deltaTime * _speed;
     }
-
-    public void MoveLeftUp()
-    {   
-        transform.position += new Vector3(_moveX, _moveY, 0) * _correctSpeed * _speed;
-    }
-
-    public void MoveLeftDown()
-
-    {
-        transform.position += new Vector3(_moveX, -_moveY, 0) * _correctSpeed * _speed;
-    }
-
-    public void MoveRightUp()
-    {
-        transform.position += new Vector3(-_moveX, _moveY, 0) * _correctSpeed * _speed;
-    }
-    public void MoveRightDown()
-    {
-        transform.position -= new Vector3(-_moveX, -_moveY, 0) * _correctSpeed * _speed;
-    }
-
 
     public void TakeDamage(float damage)
     {
-        Health -= damage;
+        _health -= damage;
     }
 
     public override void Recycle()
@@ -145,6 +105,3 @@ public class Asteroid : GameBehavior
         OriginFactory.Reclaim(this);
     }
 }
-
-        
-

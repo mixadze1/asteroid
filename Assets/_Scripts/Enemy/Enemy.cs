@@ -6,27 +6,33 @@ public class Enemy : GameBehavior
     [SerializeField] private Transform _spawnShellCoord;
     [SerializeField] private Transform _explosion;
 
-    private float _speedShell = 8f;
     private Transform _model;
-    private float _timeToShoot = 3f;
-    private float _speed;
-    private float frequency = 400f;
-    private float offset = 3.5f;
-    private float _damage = 1f;
-    private float _timeLiveShell;
-    private Vector3 _startPosition;
     private SpaceShip _target;
-    public float Health { get; private set; }
+
+    private Vector3 _startPosition;
+
+    private float _speedShell;
+    private float _damage;
+    private float _timeToShoot;
+    private float _timeLiveShell;
+    private float _speed;
+    private float _health;
+
+    private float offset = 3.5f; 
 
     public EnemyFactory OriginFactory { get; set; }
 
-    public void Initialize(float scale, float pathOffset, float speed, float health, float timeLiveShell)
+    public void Initialize(float scale, float timeToShoot, float speed, float health, float timeLiveShell, 
+        float damage, float speedShell)
     {
+        _speedShell = speedShell;
+        _damage = damage;
+        _timeToShoot = timeToShoot;
         _timeLiveShell = timeLiveShell;
         _model = this.transform;
         _model.localScale = new Vector3(scale, scale, scale);
         _speed = speed;
-        Health = health;
+        _health = health;
     }
 
     public void SpawnOn(Transform transform, SpaceShip spaceShip)
@@ -39,7 +45,7 @@ public class Enemy : GameBehavior
 
     public void Update()
     {
-        if(Health <= 0)
+        if(_health <= 0)
         {
             SfxAudio._instance.DieNlo.Play();
             Instantiate(_explosion,transform.position, Quaternion.identity);
@@ -69,7 +75,7 @@ public class Enemy : GameBehavior
 
     public void TakeDamage(float damage)
     {
-        Health -= damage;
+        _health -= damage;
     }
 
     public override void Recycle()

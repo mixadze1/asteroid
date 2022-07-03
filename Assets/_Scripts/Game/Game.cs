@@ -142,17 +142,21 @@ public class Game : MonoBehaviour
     {
         Vector3 position = _instance._spawnCoord[Random.Range(0,_instance._spawnCoord.Count - 1)].position;
         Asteroid asteroid = factory.Get(type);
-        asteroid.SpawnOn(position, _instance._vectorAsteroidMove, position);
+        asteroid.SpawnOn(position, 0, position, 0);
        _instance._asteroid.Add(asteroid); 
     }
 
-    public static void SpawnAsteroidAfterDieBigAsteroid(Vector3 position, AsteroidType type, Vector3 startPosition)
+    public static void SpawnAsteroidAfterDieAsteroid(float rotationZ, AsteroidType type, Vector3 startPosition, 
+        Vector3 position)
     {
+
         Asteroid asteroid = _instance._asteroidFactory.Get(type);
         Asteroid asteroid2 = _instance._asteroidFactory.Get(type);
 
-        asteroid.SpawnOn(position, _instance._vectorAsteroidMove, startPosition);
-        asteroid2.SpawnOn(position, _instance._vectorAsteroidMove, startPosition);
+        float rotation45 =  45f;
+
+        asteroid.SpawnOn(position, rotationZ, startPosition, rotation45);
+        asteroid2.SpawnOn(position, rotationZ, startPosition, -rotation45);
 
         _instance._asteroid.Add(asteroid);
         _instance._asteroid.Add(asteroid2);

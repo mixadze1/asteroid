@@ -16,6 +16,10 @@ public class AsteroidFactory : GameObjectFactory
         public FloatRange Speed = new FloatRange(0);
         [FloatRangeSlider(1f, 10f)]
         public FloatRange Health = new FloatRange(0);
+        [FloatRangeSlider(0.2f, 1f)]
+        public FloatRange Explosion = new FloatRange(0);
+        [FloatRangeSlider(-360f, 360f)]
+        public FloatRange Rotation = new FloatRange(0);
     }
 
     [SerializeField] private AsteroidConfig _small, _medium, _large;
@@ -27,7 +31,7 @@ public class AsteroidFactory : GameObjectFactory
         instance.OriginFactory = this;
         instance.Type = type;
         instance.Initialize(config.Scale.RandomValueInRange,config.Speed.RandomValueInRange,
-            config.Health.RandomValueInRange);
+            config.Health.RandomValueInRange, config.Explosion.RandomValueInRange,config.Rotation.RandomValueInRange);
         return instance;
     }
 

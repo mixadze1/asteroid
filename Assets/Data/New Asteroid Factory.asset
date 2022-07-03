@@ -21,11 +21,17 @@ MonoBehaviour:
       _min: 0
       _max: 0
     Speed:
-      _min: 0.2276192
-      _max: 0.2592034
+      _min: 1
+      _max: 1
     Health:
       _min: 1
       _max: 1
+    Explosion:
+      _min: 0.45
+      _max: 0.55
+    Rotation:
+      _min: 50
+      _max: 50
   _medium:
     Prefab: {fileID: 1908777626567942300, guid: 9c97547dca1795947802d99d91022564, type: 3}
     Scale:
@@ -35,11 +41,17 @@ MonoBehaviour:
       _min: 0
       _max: 0
     Speed:
-      _min: 0.22761923
-      _max: 0.25920337
+      _min: 1
+      _max: 1
     Health:
       _min: 1
       _max: 1
+    Explosion:
+      _min: 0.7
+      _max: 0.8
+    Rotation:
+      _min: -25.39267
+      _max: 177.22513
   _large:
     Prefab: {fileID: 2005613367464198737, guid: 39a3df4a0cb31ba4ba979008e25a378a, type: 3}
     Scale:
@@ -49,8 +61,14 @@ MonoBehaviour:
       _min: 0.053908356
       _max: 0.16172507
     Speed:
-      _min: 0.2
-      _max: 0.2
+      _min: 1
+      _max: 1
     Health:
       _min: 1
       _max: 1
+    Explosion:
+      _min: 0.95
+      _max: 1
+    Rotation:
+      _min: -109.31933
+      _max: 116.85868

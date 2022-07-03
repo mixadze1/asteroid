@@ -10,14 +10,18 @@ public class EnemyFactory : GameObjectFactory
         public Enemy Prefab;
         [FloatRangeSlider(0.5f, 2f)]
         public FloatRange Scale = new FloatRange(1f);
-        [FloatRangeSlider(-0.4f, 0.4f)]
-        public FloatRange PathOffset = new FloatRange(0);
+        [FloatRangeSlider(1f, 5f)]
+        public FloatRange TimeToShoot = new FloatRange(0);
         [FloatRangeSlider(0.001f, 0.005f)]
         public FloatRange Speed = new FloatRange(0);
         [FloatRangeSlider(1f, 10f)]
         public FloatRange Health = new FloatRange(0);
         [FloatRangeSlider(1f, 5f)]
         public FloatRange TimeLiveShell = new FloatRange(0);
+        [FloatRangeSlider(1f, 10f)]
+        public FloatRange Damage = new FloatRange(0);
+        [FloatRangeSlider(1f, 10f)]
+        public FloatRange SpeedShell = new FloatRange(0);
     }
 
     [SerializeField] private EnemyConfig _nlo;
@@ -27,8 +31,9 @@ public class EnemyFactory : GameObjectFactory
         var config = GetConfig(type);
         Enemy instance = CreateGameObjectInstance(config.Prefab);
         instance.OriginFactory = this;
-        instance.Initialize(config.Scale.RandomValueInRange, config.PathOffset.RandomValueInRange,
-            config.Speed.RandomValueInRange, config.Health.RandomValueInRange, config.TimeLiveShell.RandomValueInRange);
+        instance.Initialize(config.Scale.RandomValueInRange, config.TimeToShoot.RandomValueInRange,
+            config.Speed.RandomValueInRange, config.Health.RandomValueInRange, config.TimeLiveShell.RandomValueInRange,
+           config.Damage.RandomValueInRange, config.SpeedShell.RandomValueInRange);
         return instance;
     }
 
