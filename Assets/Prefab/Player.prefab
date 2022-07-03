@@ -158,9 +158,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75247ef65fe87514a851b10b0dde26c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _model: {fileID: 6827166166116983349}
-  _spawnShellCoord: {fileID: 6827166166116983349}
-  _speedShell: 0.05
+  _modelShip: {fileID: 6827166166116983349}
+  _spawnShell: {fileID: 7303697021275913335}
+  _explosion: {fileID: 4977646799359860, guid: 46876a2780737ec45a19d62f88e5ce56, type: 3}
 --- !u!50 &2592108565041129746
 Rigidbody2D:
   serializedVersion: 4

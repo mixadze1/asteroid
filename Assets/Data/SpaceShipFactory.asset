@@ -17,28 +17,37 @@ MonoBehaviour:
     SpeedMax: 0.35
     Speed: 0.117
     SpeedRotatePlayer: 2.61
+    SpeedShell: 0.251
     Health: 1
     Inertia: 0.03
     Damage: 1
     Scale: 0.1023
-    SpeedDamping: 0.96
+    TimeImmortal: 2.5
+    TimeBlinking: 0.45
+    TimeLiveShell: 3
   _blackSpacekShip:
     Prefab: {fileID: 6017981731566442606, guid: 831782af525614e49895a79a666021cc, type: 3}
-    SpeedMax: 0.846
+    SpeedMax: 0.282
     Speed: 0.667
     SpeedRotatePlayer: 6.67
+    SpeedShell: 0.435
     Health: 1
     Inertia: 0.0677
     Damage: 1
     Scale: 0.2
-    SpeedDamping: 0.99
+    TimeImmortal: 0
+    TimeBlinking: 0
+    TimeLiveShell: 3
   _fastSpaceShip:
     Prefab: {fileID: 6017981731566442606, guid: 831782af525614e49895a79a666021cc, type: 3}
-    SpeedMax: 0
-    Speed: 0
-    SpeedRotatePlayer: 0
+    SpeedMax: 0.428
+    Speed: 0.142
+    SpeedRotatePlayer: 3.77
+    SpeedShell: 0.217
     Health: 0
     Inertia: 0.03
-    Damage: 0
-    Scale: 0
-    SpeedDamping: 0
+    Damage: 3.05
+    Scale: 0.1601
+    TimeImmortal: 3.25
+    TimeBlinking: 0.363
+    TimeLiveShell: 3

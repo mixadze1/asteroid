@@ -21,8 +21,11 @@ MonoBehaviour:
       _min: 0
       _max: 0
     Speed:
-      _min: 0.05
-      _max: 0.05
+      _min: 0.0025782206
+      _max: 0.0025782206
     Health:
       _min: 1
       _max: 1
+    TimeLiveShell:
+      _min: 3
+      _max: 3

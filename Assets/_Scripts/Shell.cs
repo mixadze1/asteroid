@@ -5,30 +5,37 @@ using UnityEngine;
 public class Shell : GameBehavior
 {
     [SerializeField] private TargetPointCheckEnemy _targetPoint;
-    private float _speed;
-    private Color _color;
+
     private Transform _target;
     private SpaceShip _ship;
-    private bool _isPlayer;
+
     private Vector3 _positionShip;
+
+    private float _speed;
+    private float _timeLiveShell;
+
+    private float _correctSpeed = 0.1f;
+      
+    private bool _isPlayer;
+   
     public ShellFactory OriginFactory { get; set; }
 
-    public void  Initialize(Transform spawn, float speed, float damage, Color color, bool isPlayer)
+    public void  Initialize(Transform spawn, float speed, float damage, bool isPlayer, float timeLiveShell)
     {  
-        _color = color;
         transform.localPosition = spawn.position;
         transform.rotation = spawn.rotation;
         _speed = speed;
         _isPlayer = isPlayer;
+        _timeLiveShell = timeLiveShell;
         if (!isPlayer)
             FindPlayer();
-
+        StartCoroutine(TimeLiveShell());
     }
 
     private void Update()
     {
         if (_isPlayer)
-        transform.Translate(transform.up * _speed, Space.World);
+        transform.Translate(transform.up * _speed * _correctSpeed, Space.World);
 
         if (_ship != null)
         {
@@ -54,9 +61,15 @@ public class Shell : GameBehavior
         }
     }
 
+
+    private IEnumerator TimeLiveShell()
+    {
+        yield return new WaitForSeconds(_timeLiveShell);
+        Destroy(gameObject);
+    }
     public override void Recycle()
     {
         if (this.gameObject != null)
             OriginFactory.Reclaim(this);
-}
+    }
 }
