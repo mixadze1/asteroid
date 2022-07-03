@@ -1,7 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 [CreateAssetMenu]
 public class AsteroidWave : ScriptableObject
 {
@@ -25,8 +24,7 @@ public class AsteroidWave : ScriptableObject
         }
 
         public float Progress(float deltaTime, GameBehaviorCollection asteroid)
-        {
-           
+        {         
                 deltaTime = _sequence.Progress(deltaTime, asteroid);
                 while (deltaTime >= 0f)
                 {
@@ -36,9 +34,7 @@ public class AsteroidWave : ScriptableObject
                     }
                     _sequence = _wave._spawnSequences[_index].Begin();
                     deltaTime = _sequence.Progress(deltaTime, asteroid);
-                }
-                
-            
+                }     
             return -1f;
         }
     }

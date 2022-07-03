@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraViev : MonoBehaviour
 {
-
-
     public void LateUpdate()
     {
         Vector3 point = Camera.main.WorldToScreenPoint(transform.position);
@@ -14,7 +10,6 @@ public class CameraViev : MonoBehaviour
             point.x = 1;
             TeleportXZero(point);
         }
-
         if (point.x > Screen.width)
         {
             point.x = 0;
@@ -33,7 +28,6 @@ public class CameraViev : MonoBehaviour
             Teleport(point);
             return;
         }
-
     }
 
     private void TeleportXZero(Vector3 point)
@@ -42,7 +36,6 @@ public class CameraViev : MonoBehaviour
         world.z = 0;
         world.x = -world.x;
         transform.localPosition = world;
-
     }
 
     private void TeleportYZero(Vector3 point)

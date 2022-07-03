@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public partial class TargetPointCheckAsteroid : MonoBehaviour
@@ -8,8 +6,6 @@ public partial class TargetPointCheckAsteroid : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-       
-
         if (collision.GetComponent<Asteroid>())
         {
             collision.GetComponent<Asteroid>().TakeDamage(_damage);

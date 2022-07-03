@@ -1,12 +1,13 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 [CreateAssetMenu]
 public class GameScenario : ScriptableObject
 {
     [SerializeField] private AsteroidWave[] _waves;
+
     public State Begin() => new State(this);
+
     [Serializable]
     public struct State
     {

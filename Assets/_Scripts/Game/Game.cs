@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Common;
+
 public class Game : MonoBehaviour
 {
     [SerializeField] private AsteroidFactory _asteroidFactory;
@@ -15,7 +16,8 @@ public class Game : MonoBehaviour
     [SerializeField] private List<Transform> _spawnCoord = new List<Transform>();
     [SerializeField, Range(1f, 40f)] private float _timeToSpawnNlo = 5f;
     [SerializeField, Range(1f, 15f)] private float _prepareTime = 10f;
-   
+
+    private SpaceShip _instanceSpaceShip;
     private GameScenario.State _activateScenarioAsteroid;
 
     private Coroutine _prepareRoutine;
@@ -105,6 +107,7 @@ public class Game : MonoBehaviour
     {
             SpaceShip spaceShip = _shipFactory.Get(_type);
             spaceShip.SpawnOn(gameControl);
+        _instanceSpaceShip = spaceShip;
             _spaceShip.Add(spaceShip);     
     }
 
@@ -114,7 +117,7 @@ public class Game : MonoBehaviour
         {
             yield return new WaitForSeconds(_instance._timeToSpawnNlo);
             Enemy enemy = _instance._enemyFactory.Get(EnemyType.NLO);
-            enemy.SpawnOn(_instance._spawnCoord[Random.Range(0, _instance._spawnCoord.Count - 1)]);
+            enemy.SpawnOn(_instance._spawnCoord[Random.Range(0, _instance._spawnCoord.Count - 1)], _instanceSpaceShip);
             _nlo.Add(enemy);
         }     
     }
@@ -139,7 +142,7 @@ public class Game : MonoBehaviour
     {
         Vector3 position = _instance._spawnCoord[Random.Range(0,_instance._spawnCoord.Count - 1)].position;
         Asteroid asteroid = factory.Get(type);
-        asteroid.SpawnAsteroid(position, _instance._vectorAsteroidMove, position);
+        asteroid.SpawnOn(position, _instance._vectorAsteroidMove, position);
        _instance._asteroid.Add(asteroid); 
     }
 
@@ -148,8 +151,8 @@ public class Game : MonoBehaviour
         Asteroid asteroid = _instance._asteroidFactory.Get(type);
         Asteroid asteroid2 = _instance._asteroidFactory.Get(type);
 
-        asteroid.SpawnAsteroid(position, _instance._vectorAsteroidMove, startPosition);
-        asteroid2.SpawnAsteroid(position, _instance._vectorAsteroidMove, startPosition);
+        asteroid.SpawnOn(position, _instance._vectorAsteroidMove, startPosition);
+        asteroid2.SpawnOn(position, _instance._vectorAsteroidMove, startPosition);
 
         _instance._asteroid.Add(asteroid);
         _instance._asteroid.Add(asteroid2);

@@ -1,7 +1,6 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 [CreateAssetMenu]
 public class EnemyFactory : GameObjectFactory
 {
@@ -39,7 +38,6 @@ public class EnemyFactory : GameObjectFactory
         {
             case EnemyType.NLO:
                 return _nlo;
-
         }
         return _nlo;
     }

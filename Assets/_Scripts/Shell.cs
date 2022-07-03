@@ -6,7 +6,6 @@ public class Shell : GameBehavior
 {
     [SerializeField] private TargetPointCheckAsteroid _targetPoint;
 
-    private Transform _target;
     private SpaceShip _ship;
 
     private Vector3 _positionShip;
@@ -20,7 +19,7 @@ public class Shell : GameBehavior
    
     public ShellFactory OriginFactory { get; set; }
 
-    public void  Initialize(Transform spawn, float speed, float damage, bool isPlayer, float timeLiveShell)
+    public void  Initialize(Transform spawn, float speed, float damage, bool isPlayer, float timeLiveShell, SpaceShip spaceShip)
     {  
         transform.localPosition = spawn.position;
         transform.rotation = spawn.rotation;
@@ -28,7 +27,8 @@ public class Shell : GameBehavior
         _isPlayer = isPlayer;
         _timeLiveShell = timeLiveShell;
         if (!isPlayer)
-            FindPlayer();
+            _ship = spaceShip;
+        PositionPlayer();
         StartCoroutine(TimeLiveShell());
     }
 
@@ -44,21 +44,18 @@ public class Shell : GameBehavior
        
     }
 
-    private void FindPlayer()
+    private void PositionPlayer()
     {
-        _ship = FindObjectOfType<SpaceShip>();
         if(_ship != null)
             _positionShip = _ship.transform.position;
     }
 
     private void ShellMoveToPlayer()
-    {
-        if (_ship != null)
-        {
+    { 
             transform.rotation = _ship.transform.rotation;
             transform.position += (_positionShip - transform.position).normalized * 8 * Time.deltaTime;
-            if ((_positionShip - transform.position).sqrMagnitude < 0.01f) Destroy(gameObject);
-        }
+            if ((_positionShip - transform.position).sqrMagnitude < 0.01f)
+                Destroy(gameObject);
     }
 
 
@@ -67,6 +64,7 @@ public class Shell : GameBehavior
         yield return new WaitForSeconds(_timeLiveShell);
         Destroy(gameObject);
     }
+
     public override void Recycle()
     {
         if (this.gameObject != null)

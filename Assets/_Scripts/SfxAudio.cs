@@ -10,10 +10,10 @@ public class SfxAudio : MonoBehaviour
     public AudioSource DieNlo;
     public AudioSource DieAsteroid;
 
-    public static SfxAudio Instance;
+    public static SfxAudio _instance;
 
     public void Awake()
     {
-        Instance = this;
+        _instance = this;
     }
 }

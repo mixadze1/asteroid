@@ -8,12 +8,15 @@ public class Asteroid : GameBehavior
     [SerializeField] private Transform _explosion;
 
     private Vector3 _startPosition;
-    private float _directionAngleFrom, _directionAngleTo;
-    private float _pathOffset;
+
     private float _moveX = 0.05f;
     private float _moveY = 0.05f;
     private float _correctSpeed = 0.1f;
     private float _speed;
+
+    private float _bigExplosion = 1f;
+    private float _mediumExposion = 0.75f;
+    private float _smallExplosion = 0.5f;
   
     private Transform _moveTo;
     public float Scale { get; private set; }
@@ -23,17 +26,16 @@ public class Asteroid : GameBehavior
 
     public AsteroidType Type { get; set; }
 
-    public void Initialize(float scale, float pathOffset, float speed, float health)
+    public void Initialize(float scale, float speed, float health)
     {
         _model.localScale = new Vector3(scale, scale, scale);
-        _pathOffset = pathOffset;
         _speed = speed;
         Scale = scale;
         Health = health;
 
     }
 
-    public void SpawnAsteroid(Vector3 position, Transform asteroidMove, Vector3 startPosition)
+    public void SpawnOn(Vector3 position, Transform asteroidMove, Vector3 startPosition)
     {
         _model.localPosition = position;
         _moveTo = asteroidMove;
@@ -44,28 +46,27 @@ public class Asteroid : GameBehavior
     {
         if (Health <= 0)
         {
-            SfxAudio.Instance.DieAsteroid.Play();
+            SfxAudio._instance.DieAsteroid.Play();
             if (Type == AsteroidType.Large)
             {
                 Recycle();
-                Instantiate(_explosion, transform.position, Quaternion.identity);
-                Game.SpawnAsteroidAfterDieBigAsteroid(this.transform.position, AsteroidType.Medium, _startPosition);
+                SpawnMediumAsteroid();
+                Explosion(_bigExplosion);
                 GUIManager._instance.Score += GUIManager._instance.LargeAsteroidScore;
             }
             if (Type == AsteroidType.Medium)
             {
                 Recycle();
-                _explosion.localScale = Vector3.one * 0.75f;
-                Instantiate(_explosion, transform.position, Quaternion.identity);
-                Game.SpawnAsteroidAfterDieBigAsteroid(this.transform.position, AsteroidType.Small, _startPosition);
+                SpawnSmallAsteroid();
+                Explosion(_mediumExposion);
                 GUIManager._instance.Score += GUIManager._instance.MediumAteroidScore;
             }
             if (Type == AsteroidType.Small)
             {
-                _explosion.localScale = Vector3.one * 0.5f;
-                Instantiate(_explosion, transform.position, Quaternion.identity);
-                GUIManager._instance.Score += GUIManager._instance.SmallAteroidScore;
                 Recycle();
+                Explosion(_smallExplosion);
+                GUIManager._instance.Score += GUIManager._instance.SmallAteroidScore;
+               
             }
             return false;
         }
@@ -73,30 +74,65 @@ public class Asteroid : GameBehavior
         return true;
     }
 
+    private void SpawnMediumAsteroid()
+    {    
+        Game.SpawnAsteroidAfterDieBigAsteroid(this.transform.position, AsteroidType.Medium, _startPosition);
+    }
+
+    private void SpawnSmallAsteroid()
+    {   
+        Instantiate(_explosion, transform.position, Quaternion.identity);
+        Game.SpawnAsteroidAfterDieBigAsteroid(this.transform.position, AsteroidType.Small, _startPosition);
+    }
+
+    private void Explosion(float scale)
+    {
+        _explosion.localScale = Vector3.one * scale;
+        Instantiate(_explosion, transform.position, Quaternion.identity);
+    }
 
     private void MoveAsteroid()
     {
         if(_startPosition.x < 0 && _startPosition.y > 0)
         {
-            transform.position +=  new Vector3(_moveX, -_moveY, 0) * _correctSpeed * _speed;
+            MoveLeftDown();
         }
 
         if(_startPosition.x < 0 && _startPosition.y < 0)
         {
-            transform.position += new Vector3(_moveX, _moveY, 0) * _correctSpeed * _speed;
+            MoveLeftUp();
         }
 
         if (_startPosition.x > 0 && _startPosition.y < 0)
         {
-            transform.position += new Vector3(-_moveX, _moveY, 0) * _correctSpeed * _speed;
+            MoveRightUp();
         }
 
         if (_startPosition.x > 0 && _startPosition.y > 0)
         {
-            transform.position -=  new Vector3(-_moveX, -_moveY, 0) * _correctSpeed * _speed;
+            MoveRightDown();
         }     
     }
 
+    public void MoveLeftUp()
+    {   
+        transform.position += new Vector3(_moveX, _moveY, 0) * _correctSpeed * _speed;
+    }
+
+    public void MoveLeftDown()
+
+    {
+        transform.position += new Vector3(_moveX, -_moveY, 0) * _correctSpeed * _speed;
+    }
+
+    public void MoveRightUp()
+    {
+        transform.position += new Vector3(-_moveX, _moveY, 0) * _correctSpeed * _speed;
+    }
+    public void MoveRightDown()
+    {
+        transform.position -= new Vector3(-_moveX, -_moveY, 0) * _correctSpeed * _speed;
+    }
 
 
     public void TakeDamage(float damage)

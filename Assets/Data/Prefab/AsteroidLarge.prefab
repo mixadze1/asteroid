@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 4743209675147345755}
   - component: {fileID: 4976192118307612593}
   - component: {fileID: 905309621180322315}
+  - component: {fileID: 661893535033208798}
   m_Layer: 0
   m_Name: AsteroidLarge
   m_TagString: Untagged
@@ -103,6 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _model: {fileID: 1479788971307083679}
   _explosion: {fileID: 8756226310012120331, guid: ce98c86ecd107e8418581e37460b74d5, type: 3}
+  _moveAsteroid: {fileID: 0}
 --- !u!61 &3881971804342160719
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -186,3 +188,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7acd4985a2ad6849bf8a2798e26f2d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &661893535033208798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6431869578252277147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4333a621b3f2584ea0b25470e59ff6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _model: {fileID: 0}
+  _explosion: {fileID: 0}
+  _moveAsteroid: {fileID: 0}

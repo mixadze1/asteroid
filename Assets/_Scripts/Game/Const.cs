@@ -13,7 +13,6 @@
             public const string MOUSE = "Mouse";
             public const string KEYBOARD = "KeyBoard";
         }
-      
     }
 }
 

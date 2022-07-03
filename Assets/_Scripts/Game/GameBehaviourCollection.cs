@@ -11,20 +11,6 @@ public class GameBehaviorCollection
         _behaviors.Add(asteroid);
     }
 
-    public GameBehavior SearchFreeInPoolAsteroid(AsteroidType type)
-    {
-        foreach(var behavior in _behaviors)
-        {
-            if (behavior.gameObject.activeSelf == false)
-            {
-                behavior.gameObject.SetActive(true);
-                return behavior;
-            }
-            
-        }
-        return null;
-    }
-
     public void GameUpdate()
     {
         for (int i = 0; i < _behaviors.Count; i++)

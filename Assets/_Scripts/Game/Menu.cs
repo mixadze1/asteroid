@@ -1,14 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Common;
 public class Menu : MonoBehaviour
 {
-
     [SerializeField] private GameObject _mouseButton;
     [SerializeField] private GameObject _keyBoardButton;
-
 
     private void Awake()
     {
@@ -24,8 +20,6 @@ public class Menu : MonoBehaviour
         }
        
     }
-
-    
 
     public void StartGame()
     {
@@ -47,8 +41,5 @@ public class Menu : MonoBehaviour
         _keyBoardButton.SetActive(true);
         _mouseButton.SetActive(false);
     }
-
- 
-
 }
 

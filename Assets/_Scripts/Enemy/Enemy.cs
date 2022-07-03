@@ -1,11 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : GameBehavior
 {
     [SerializeField] private Transform _spawnShellCoord;
     [SerializeField] private Transform _explosion;
+
     private float _speedShell = 8f;
     private Transform _model;
     private float _timeToShoot = 3f;
@@ -29,10 +29,11 @@ public class Enemy : GameBehavior
         Health = health;
     }
 
-    public void SpawnOn(Transform transform)
+    public void SpawnOn(Transform transform, SpaceShip spaceShip)
     {
         _model.localPosition = transform.localPosition;
         _startPosition = transform.position ;
+        _target = spaceShip;
         StartCoroutine(Shoot());
     }
 
@@ -40,7 +41,7 @@ public class Enemy : GameBehavior
     {
         if(Health <= 0)
         {
-            SfxAudio.Instance.DieNlo.Play();
+            SfxAudio._instance.DieNlo.Play();
             Instantiate(_explosion,transform.position, Quaternion.identity);
             GUIManager._instance.Score += GUIManager._instance.NloScore;
             Recycle();
@@ -49,7 +50,6 @@ public class Enemy : GameBehavior
             MoveNlo(_speed);
         else
             MoveNlo(- _speed);
-
     }
 
     private void MoveNlo(float speed)
@@ -57,13 +57,12 @@ public class Enemy : GameBehavior
         transform.position = new Vector3(transform.localPosition.x + speed, Mathf.Sin(Time.fixedTime) + offset, transform.localPosition.z);
     }
 
-
     private IEnumerator Shoot()
-    {while(true)
+    {   while(true)
         {
             yield return new WaitForSeconds(_timeToShoot);
-            Game.SpawnShell(false)?.Initialize(_spawnShellCoord, _speedShell, _damage, false, _timeLiveShell);
-            SfxAudio.Instance.ShootNlo.Play();
+            Game.SpawnShell(false)?.Initialize(_spawnShellCoord, _speedShell, _damage, false, _timeLiveShell, _target);
+            SfxAudio._instance.ShootNlo.Play();
         }
        
     }

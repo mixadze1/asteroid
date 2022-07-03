@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -28,8 +26,8 @@ public class AsteroidFactory : GameObjectFactory
         Asteroid instance = CreateGameObjectInstance(config.Prefab);
         instance.OriginFactory = this;
         instance.Type = type;
-        instance.Initialize(config.Scale.RandomValueInRange, config.PathOffset.RandomValueInRange,
-            config.Speed.RandomValueInRange, config.Health.RandomValueInRange);
+        instance.Initialize(config.Scale.RandomValueInRange,config.Speed.RandomValueInRange,
+            config.Health.RandomValueInRange);
         return instance;
     }
 
