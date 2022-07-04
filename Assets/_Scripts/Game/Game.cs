@@ -22,11 +22,13 @@ public class Game : MonoBehaviour
 
     private Coroutine _prepareRoutine;
     private Coroutine _prepareRoutineNlo;
-
+  
     private GameBehaviorCollection _nlo = new GameBehaviorCollection();
     private GameBehaviorCollection _asteroid = new GameBehaviorCollection();
     private GameBehaviorCollection _spaceShip = new GameBehaviorCollection();
     private GameBehaviorCollection _shell = new GameBehaviorCollection();
+
+    private List<Asteroid> _poolAsteroid = new List<Asteroid>();
 
     private bool _isGetReady = true;
     private bool _scenarioInProcess;
@@ -141,7 +143,7 @@ public class Game : MonoBehaviour
     public static void SpawnAsteroid(AsteroidFactory factory, AsteroidType type)
     {
         Vector3 position = _instance._spawnCoord[Random.Range(0,_instance._spawnCoord.Count - 1)].position;
-        Asteroid asteroid = factory.Get(type);
+        Asteroid asteroid = factory.Get(type, _instance._poolAsteroid);
         asteroid.SpawnOn(position, 0, position, 0);
        _instance._asteroid.Add(asteroid); 
     }
@@ -149,8 +151,8 @@ public class Game : MonoBehaviour
     public static void SpawnAsteroidAfterDieAsteroid(float rotationZ, AsteroidType type, Vector3 startPosition, 
         Vector3 position)
     {
-        Asteroid asteroid = _instance._asteroidFactory.Get(type);
-        Asteroid asteroid2 = _instance._asteroidFactory.Get(type);
+        Asteroid asteroid = _instance._asteroidFactory.Get(type , _instance._poolAsteroid);
+        Asteroid asteroid2 = _instance._asteroidFactory.Get(type, _instance._poolAsteroid);
 
         float rotationAngle = _instance._needRotationAngle;
 

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu]
@@ -24,15 +25,47 @@ public class AsteroidFactory : GameObjectFactory
 
     [SerializeField] private AsteroidConfig _small, _medium, _large;
 
-    public Asteroid Get(AsteroidType type)
+
+    public Asteroid Get(AsteroidType type, List<Asteroid> pool)
+    {
+        Asteroid fromPoolAsteroid = CheckFreeAsteroid(type, pool);
+        if (fromPoolAsteroid)
+        {
+            var oldConfig = GetConfig(type);
+            fromPoolAsteroid.Initialize(oldConfig.Scale.RandomValueInRange, oldConfig.Speed.RandomValueInRange,
+                oldConfig.Health.RandomValueInRange, oldConfig.Explosion.RandomValueInRange, oldConfig.Rotation.RandomValueInRange);
+            return fromPoolAsteroid;
+        }
+
+        return NewAsteroid(type, pool);
+    }
+
+    private Asteroid NewAsteroid(AsteroidType type, List<Asteroid> pool)
     {
         var config = GetConfig(type);
         Asteroid instance = CreateGameObjectInstance(config.Prefab);
-        instance.OriginFactory = this;
         instance.Type = type;
-        instance.Initialize(config.Scale.RandomValueInRange,config.Speed.RandomValueInRange,
-            config.Health.RandomValueInRange, config.Explosion.RandomValueInRange,config.Rotation.RandomValueInRange);
+        instance.OriginFactory = this;
+        instance.Initialize(config.Scale.RandomValueInRange, config.Speed.RandomValueInRange,
+            config.Health.RandomValueInRange, config.Explosion.RandomValueInRange, config.Rotation.RandomValueInRange);
+        pool.Add(instance);
         return instance;
+    }
+
+    private Asteroid CheckFreeAsteroid(AsteroidType type, List<Asteroid> pool)
+    {
+        foreach (var asteroid in pool)
+        {
+            if (asteroid == null)
+                return null;
+            if (asteroid.Type == type && !asteroid.gameObject.activeSelf)
+            {
+                
+                asteroid.gameObject.SetActive(true);
+                return asteroid;
+            }
+        }
+        return null;
     }
 
     private AsteroidConfig GetConfig(AsteroidType type)
@@ -48,9 +81,9 @@ public class AsteroidFactory : GameObjectFactory
         }
         return _medium;
     }
-    public void Reclaim(Asteroid enemy)
+    public void Reclaim(Asteroid asteroid)
     {
-        Destroy(enemy.gameObject);
+        asteroid.gameObject.SetActive(false);
     }
 }
 
