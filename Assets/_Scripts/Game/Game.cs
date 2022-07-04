@@ -16,7 +16,7 @@ public class Game : MonoBehaviour
     [SerializeField] private List<Transform> _spawnCoord = new List<Transform>();
     [SerializeField, Range(1f, 40f)] private float _timeToSpawnNlo = 5f;
     [SerializeField, Range(1f, 15f)] private float _prepareTime = 10f;
-
+    [SerializeField, Range(15f, 45f)] private float _needRotationAngle = 45f;
     private SpaceShip _instanceSpaceShip;
     private GameScenario.State _activateScenarioAsteroid;
 
@@ -149,14 +149,13 @@ public class Game : MonoBehaviour
     public static void SpawnAsteroidAfterDieAsteroid(float rotationZ, AsteroidType type, Vector3 startPosition, 
         Vector3 position)
     {
-
         Asteroid asteroid = _instance._asteroidFactory.Get(type);
         Asteroid asteroid2 = _instance._asteroidFactory.Get(type);
 
-        float rotation45 =  45f;
+        float rotationAngle = _instance._needRotationAngle;
 
-        asteroid.SpawnOn(position, rotationZ, startPosition, rotation45);
-        asteroid2.SpawnOn(position, rotationZ, startPosition, -rotation45);
+        asteroid.SpawnOn(position, rotationZ, startPosition, rotationAngle);
+        asteroid2.SpawnOn(position, rotationZ, startPosition, -rotationAngle);
 
         _instance._asteroid.Add(asteroid);
         _instance._asteroid.Add(asteroid2);
