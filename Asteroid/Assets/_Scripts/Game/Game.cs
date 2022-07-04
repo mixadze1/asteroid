@@ -6,7 +6,6 @@ using Common;
 public class Game : MonoBehaviour
 {
     [SerializeField] private AsteroidFactory _asteroidFactory;
-    [SerializeField] private Transform _vectorAsteroidMove;
     [SerializeField] private SpaceShipFactory _shipFactory;    
     [SerializeField] private GameScenario _scenario;
     [SerializeField] private EnemyFactory _enemyFactory;
@@ -33,6 +32,7 @@ public class Game : MonoBehaviour
 
     private List<Asteroid> _poolAsteroid = new List<Asteroid>();
     private List<Shell> _poolShell = new List<Shell>();
+
     private bool _isGetReady = true;
     private bool _scenarioInProcess;
     private bool _isNotLose;
