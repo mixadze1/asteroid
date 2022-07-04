@@ -11,7 +11,7 @@ public class TargetPointCheckNlo : MonoBehaviour
             collision.GetComponent<Enemy>()?.TakeDamage(_damageEnemy);
 
             if (gameObject.GetComponent<Shell>())
-                Destroy(gameObject);
+               gameObject.SetActive(false);
         }
     }
 }

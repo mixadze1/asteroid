@@ -150,7 +150,7 @@ public class SpaceShip : GameBehavior
 
     private void Shoot()
     {
-        Game.SpawnShell(true).Initialize(_spawnShell, _speedShell, Damage, true, _timeLiveShell, null);
+        Game.SpawnShell(ShellType.SpaceShip).Initialize(_spawnShell, _speedShell, Damage, true, _timeLiveShell, null);
         SfxAudio._instance.ShootAudioSource.Play();
     }
 

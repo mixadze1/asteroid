@@ -9,7 +9,7 @@ public class TargetPointCheckEnemy : MonoBehaviour
         if (collision.GetComponent<Enemy>())
         {
             collision.GetComponent<Enemy>().TakeDamage(_damage);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

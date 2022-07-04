@@ -56,11 +56,10 @@ public class AsteroidFactory : GameObjectFactory
     {
         foreach (var asteroid in pool)
         {
-            if (asteroid == null)
+            if (pool == null)
                 return null;
             if (asteroid.Type == type && !asteroid.gameObject.activeSelf)
-            {
-                
+            {             
                 asteroid.gameObject.SetActive(true);
                 return asteroid;
             }

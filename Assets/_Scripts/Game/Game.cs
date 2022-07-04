@@ -12,11 +12,14 @@ public class Game : MonoBehaviour
     [SerializeField] private EnemyFactory _enemyFactory;
     [SerializeField] private ShellFactory _warFactory;
     [SerializeField] private MenuSetting _menuSetting;
+    [SerializeField] private Shell _shellPrefab;
+    [SerializeField] private Shell _shellEnemyPrefab;
     [SerializeField] private SpaceShipType _type;
     [SerializeField] private List<Transform> _spawnCoord = new List<Transform>();
     [SerializeField, Range(1f, 40f)] private float _timeToSpawnNlo = 5f;
     [SerializeField, Range(1f, 15f)] private float _prepareTime = 10f;
     [SerializeField, Range(15f, 45f)] private float _needRotationAngle = 45f;
+ 
     private SpaceShip _instanceSpaceShip;
     private GameScenario.State _activateScenarioAsteroid;
 
@@ -29,7 +32,7 @@ public class Game : MonoBehaviour
     private GameBehaviorCollection _shell = new GameBehaviorCollection();
 
     private List<Asteroid> _poolAsteroid = new List<Asteroid>();
-
+    private List<Shell> _poolShell = new List<Shell>();
     private bool _isGetReady = true;
     private bool _scenarioInProcess;
     private bool _isNotLose;
@@ -124,20 +127,23 @@ public class Game : MonoBehaviour
         }     
     }
 
-    public static Shell SpawnShell(bool isPlayerShell)
+    public static Shell SpawnShell(ShellType type)
     {
-        if(isPlayerShell)
+        if (type == ShellType.SpaceShip)
         {
-            Shell shell = _instance._warFactory.Shell;
-            _instance._shell.Add(shell);
-            return shell;
+            return _instance.SpawnNeedShell(_instance._shellPrefab, type);
         }
         else
         {
-            Shell shell = _instance._warFactory.ShellEnemy;
-            _instance._shell.Add(shell);
-            return shell;
-        }      
+           return _instance.SpawnNeedShell(_instance._shellEnemyPrefab, type);
+        }       
+    }
+
+    private Shell SpawnNeedShell( Shell needShell, ShellType type)
+    {
+        Shell shell = _instance._warFactory.Get(needShell, _instance._poolShell, type);
+        _instance._shell.Add(shell);
+        return shell;
     }
 
     public static void SpawnAsteroid(AsteroidFactory factory, AsteroidType type)

@@ -5,7 +5,6 @@ public class GameBehaviorCollection
 {
     private List<GameBehavior> _behaviors = new List<GameBehavior>();
 
-
     public bool IsEmpty => _behaviors.Count == 0;
     public int IsLength => _behaviors.Count;
 
@@ -26,22 +25,6 @@ public class GameBehaviorCollection
                 i -= 1;
             }
         }
-    }
-
-    private Asteroid CheckFreeAsteroid(AsteroidType type, List<Asteroid> pool)
-    {
-        foreach (var asteroid in pool)
-        {
-            if (asteroid == null)
-                return null;
-            if (asteroid.Type == type && !asteroid.gameObject.activeSelf)
-            {
-                Debug.Log("ctaru");
-                asteroid.gameObject.SetActive(true);
-                return asteroid;
-            }
-        }
-        return null;
     }
 
     public void Clear()

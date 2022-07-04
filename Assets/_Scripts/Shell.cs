@@ -19,6 +19,8 @@ public class Shell : GameBehavior
    
     public ShellFactory OriginFactory { get; set; }
 
+    public ShellType Type { get; set; }
+
     public void  Initialize(Transform spawn, float speed, float damage, bool isPlayer, float timeLiveShell, SpaceShip spaceShip)
     {  
         transform.localPosition = spawn.position;
@@ -55,14 +57,14 @@ public class Shell : GameBehavior
             transform.rotation = _ship.transform.rotation;
             transform.position += (_positionShip - transform.position).normalized * 8 * Time.deltaTime;
             if ((_positionShip - transform.position).sqrMagnitude < 0.01f)
-                Destroy(gameObject);
+                gameObject.SetActive(false);
     }
 
 
     private IEnumerator TimeLiveShell()
     {
         yield return new WaitForSeconds(_timeLiveShell);
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     public override void Recycle()

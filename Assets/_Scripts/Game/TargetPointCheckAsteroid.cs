@@ -9,7 +9,7 @@ public partial class TargetPointCheckAsteroid : MonoBehaviour
         if (collision.GetComponent<Asteroid>())
         {
             collision.GetComponent<Asteroid>().TakeDamage(_damage);
-            Destroy(gameObject);
+            gameObject.SetActive(false) ;
         }
     }
 }

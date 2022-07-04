@@ -67,7 +67,7 @@ public class Enemy : GameBehavior
     {   while(true)
         {
             yield return new WaitForSeconds(_timeToShoot);
-            Game.SpawnShell(false)?.Initialize(_spawnShellCoord, _speedShell, _damage, false, _timeLiveShell, _target);
+            Game.SpawnShell(ShellType.Enemy)?.Initialize(_spawnShellCoord, _speedShell, _damage, false, _timeLiveShell, _target);
             SfxAudio._instance.ShootNlo.Play();
         }
        
@@ -82,4 +82,10 @@ public class Enemy : GameBehavior
     {
         OriginFactory.Reclaim(this);
     }
+}
+
+public enum TypeShell
+{
+    Nlo,
+    SpaceShip
 }
