@@ -31,19 +31,34 @@ public class PlayerMovement : MonoBehaviour
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        Vector3 movement = new Vector3(horizontal, 0f, vertical);
-        Movement = movement.magnitude;
+        Vector3 movementVertical = new Vector3(vertical * transform.forward.x, 0, vertical * transform.forward.z);
+        Vector3 movementHorizontal = new Vector3(horizontal * transform.right.x, 0, horizontal * transform.right.z);
 
-        if (movement.magnitude > 0)
+        if (movementVertical.magnitude > 0 )
         {
-            movement.Normalize();
-            movement *= _speed * Time.deltaTime;
-            transform.Translate(movement, Space.World);
+            transform.Translate(MovementCalculate(movementVertical), Space.World);
         }
 
-        float velocityZ = Vector3.Dot(movement.normalized, transform.forward);
-        float velocityX = Vector3.Dot(movement.normalized, transform.right);
-        
+        if (movementHorizontal.magnitude > 0)
+        {
+            transform.Translate(MovementCalculate(movementHorizontal), Space.World);
+        }
+        AnimationMove(movementVertical, movementHorizontal);
+    }
+ 
+    private Vector3 MovementCalculate(Vector3 movement)
+    {
+        movement.Normalize();
+        movement *= _speed * Time.deltaTime;
+
+        return movement;
+    }
+
+    private void AnimationMove(Vector3 movementVertical, Vector3 movementHorizontal)
+    {
+        float velocityZ = Vector3.Dot(movementVertical.normalized, transform.forward);
+        float velocityX = Vector3.Dot(movementHorizontal.normalized, transform.right);
+
         _animator.SetFloat("VelocityZ", velocityZ, 0.1f, Time.deltaTime);
         _animator.SetFloat("VelocityX", velocityX, 0.1f, Time.deltaTime);
     }

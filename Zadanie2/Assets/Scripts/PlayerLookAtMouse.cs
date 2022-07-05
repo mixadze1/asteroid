@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerLookAtdMouse : MonoBehaviour
+public class PlayerLookAtMouse : MonoBehaviour
 {
     [SerializeField] private Transform _needRotation;
     [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private BackStep _backStep;
     [SerializeField] private LayerMask _aimLayerMask;
+    [SerializeField] private float _speedRotation;
 
     void Update()
     {
@@ -16,13 +17,17 @@ public class PlayerLookAtdMouse : MonoBehaviour
     private void AimLookAtMouse()
     {
         if (_playerMovement.IsFinishing)
-            return;
-
-       if (_backStep.CanBackStep && _backStep.Enemy != null)
         {
             transform.LookAt(_backStep.Enemy.transform);
             return;
         }
+          
+
+       /* if (_backStep.CanBackStep && _backStep.Enemy != null)
+        {
+            transform.LookAt(_backStep.Enemy.transform);
+            return;
+        }*/
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, _aimLayerMask))
@@ -34,7 +39,7 @@ public class PlayerLookAtdMouse : MonoBehaviour
             _direction.y = 0f;
             _direction.Normalize();
             Debug.DrawRay(_needRotation.transform.position, _direction, Color.green);
-            _needRotation.transform.rotation = Quaternion.LookRotation(_direction, _needRotation.transform.up);
+            transform.rotation = Quaternion.LookRotation(_direction, _needRotation.transform.up);
         }
     }
 }
