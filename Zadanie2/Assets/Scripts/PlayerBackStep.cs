@@ -7,6 +7,7 @@ public class PlayerBackStep : MonoBehaviour
     [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private BackStep _backStep;
     [SerializeField] private TextMeshProUGUI _textBackStep;
+
     public const string FINISHING = "Finishing";
 
     void Update()

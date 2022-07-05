@@ -20,7 +20,6 @@ public class Enemy : MonoBehaviour
         
     public void TakeDamage(float damage)
     {
-        Debug.Log(_health);
         _health -= damage;
     }
 
@@ -41,7 +40,8 @@ public class Enemy : MonoBehaviour
         gameObject.GetComponent<Animator>().enabled = false;
 
         yield return new WaitForSeconds(_timeToDestroy - _timeToActivateRagdoll);
-        Destroy(gameObject);
+        var model = gameObject.GetComponentInParent<Rigidbody>();
+        Destroy(model.gameObject);
 
     }
 }

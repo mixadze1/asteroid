@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerLookAtMouse : MonoBehaviour
 {
     [SerializeField] private Transform _needRotation;
+    [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private BackStep _backStep;
     [SerializeField] private LayerMask _aimLayerMask;
@@ -41,7 +42,8 @@ public class PlayerLookAtMouse : MonoBehaviour
         var _direction = destination - _needRotation.transform.position;
         _direction.y = 0f;
         _direction.Normalize();
-        transform.rotation = Quaternion.LookRotation(_direction, _needRotation.transform.up);
+        _rigidbody.MoveRotation(Quaternion.LookRotation(_direction, _needRotation.transform.up));
+       // transform.rotation = Quaternion.LookRotation(_direction, _needRotation.transform.up);
     }
 
     private bool CheckMouseInRangeModel(Ray ray)
