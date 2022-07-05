@@ -8,7 +8,7 @@ public class PlayerLookAtMouse : MonoBehaviour
     [SerializeField] private PlayerMovement _playerMovement;
     [SerializeField] private BackStep _backStep;
     [SerializeField] private LayerMask _aimLayerMask;
-    [SerializeField] private float _speedRotation;
+    [SerializeField] private LayerMask _player;
 
     void Update()
     {
@@ -21,26 +21,35 @@ public class PlayerLookAtMouse : MonoBehaviour
             transform.LookAt(_backStep.Enemy.transform);
             return;
         }
-          
-
-       /* if (_backStep.CanBackStep && _backStep.Enemy != null)
-        {
-            transform.LookAt(_backStep.Enemy.transform);
-            return;
-        }*/
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, _aimLayerMask))
-        {
-            var destination = hitInfo.point;
-            destination.y = _needRotation.transform.position.y;
 
-            var _direction = destination - _needRotation.transform.position;
-            _direction.y = 0f;
-            _direction.Normalize();
-            Debug.DrawRay(_needRotation.transform.position, _direction, Color.green);
-            transform.rotation = Quaternion.LookRotation(_direction, _needRotation.transform.up);
+        if (CheckMouseInRangeModel(ray))
+            return;
+
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, _aimLayerMask))
+        {
+            CalculateRotation(hitInfo);         
         }
+
     }
+
+    private void CalculateRotation(RaycastHit hitInfo)
+    {
+        var destination = hitInfo.point;
+        destination.y = _needRotation.transform.position.y;
+        var _direction = destination - _needRotation.transform.position;
+        _direction.y = 0f;
+        _direction.Normalize();
+        transform.rotation = Quaternion.LookRotation(_direction, _needRotation.transform.up);
+    }
+
+    private bool CheckMouseInRangeModel(Ray ray)
+    {
+        if (Physics.Raycast(ray, Mathf.Infinity, _player))
+            return true;
+        return false;
+    }
+    
 }
 
