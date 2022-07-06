@@ -40,8 +40,7 @@ public class Enemy : MonoBehaviour
         gameObject.GetComponent<Animator>().enabled = false;
 
         yield return new WaitForSeconds(_timeToDestroy - _timeToActivateRagdoll);
-        var model = gameObject.GetComponentInParent<Rigidbody>();
-        Destroy(model.gameObject);
+        Destroy(gameObject);
 
     }
 }

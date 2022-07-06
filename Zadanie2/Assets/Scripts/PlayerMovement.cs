@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IMovable
 {
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private Animator _animator;
@@ -31,11 +31,16 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
+        Move();
+    }
+
+    public void Move()
+    {
         if (_isFinishing)
         {
             _rb.velocity = Vector3.zero;
             return;
-        }   
+        }
 
         float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
@@ -50,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
 
         AnimationMove(movementVertical, movementHorizontal);
     }
- 
+
     private Vector3 MovementCalculate(Vector3 movement)
     {
         movement *= _speed;
@@ -65,4 +70,6 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetFloat("VelocityZ", velocityZ, 0.1f, Time.deltaTime);
         _animator.SetFloat("VelocityX", velocityX, 0.1f, Time.deltaTime);
     }
+
+   
 }
